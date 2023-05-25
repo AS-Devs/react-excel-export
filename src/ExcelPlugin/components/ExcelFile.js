@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {saveAs} from "file-saver";
+import { saveAs } from "file-saver";
 import XLSX from "tempa-xlsx";
 
 import ExcelSheet from "../elements/ExcelSheet";
-import {strToArrBuffer, excelSheetFromAoA, excelSheetFromDataSet} from "../utils/DataUtil";
+import { strToArrBuffer, excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
 
 class ExcelFile extends React.Component {
-    fileExtensions = ['xlsx', 'xls', 'csv', 'txt', 'html'];
-    defaultFileExtension = 'xlsx';
-
-    static  props = {
+    static props = {
         hideElement: PropTypes.bool,
         filename: PropTypes.string,
         fileExtension: PropTypes.string,
@@ -42,6 +39,9 @@ class ExcelFile extends React.Component {
 
         this.createSheetData = this.createSheetData.bind(this);
     }
+
+    fileExtensions = ['xlsx', 'xls', 'csv', 'txt', 'html'];
+    defaultFileExtension = 'xlsx';
 
     createSheetData(sheet) {
         const columns = sheet.props.children;
@@ -79,9 +79,9 @@ class ExcelFile extends React.Component {
 
         const fileExtension = this.getFileExtension();
         const fileName = this.getFileName();
-        const wbout = XLSX.write(wb, {bookType: fileExtension, bookSST: true, type: 'binary'});
+        const wbout = XLSX.write(wb, { bookType: fileExtension, bookSST: true, type: 'binary' });
 
-        saveAs(new Blob([strToArrBuffer(wbout)], {type: "application/octet-stream"}), fileName);
+        saveAs(new Blob([strToArrBuffer(wbout)], { type: "application/octet-stream" }), fileName);
     }
 
     getFileName() {

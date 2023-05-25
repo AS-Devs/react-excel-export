@@ -17,7 +17,7 @@ var strToArrBuffer = function strToArrBuffer(s) {
     var buf = new ArrayBuffer(s.length);
     var view = new Uint8Array(buf);
 
-    for (var i = 0; i != s.length; ++i) {
+    for (var i = 0; i <= s.length; ++i) {
         view[i] = s.charCodeAt(i) & 0xFF;
     }
 
@@ -84,8 +84,8 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet) {
             ws['!cols'] = columnsWidth;
         }
 
-        for (var R = 0; R != data.length; ++R, rowCount++) {
-            for (var C = 0; C != data[R].length; ++C) {
+        for (var R = 0; R !== data.length; ++R, rowCount++) {
+            for (var C = 0; C !== data[R].length; ++C) {
                 var cellRef = _tempaXlsx2.default.utils.encode_cell({ c: C + xSteps, r: rowCount });
                 fixRange(range, R, C, rowCount, xSteps, ySteps);
                 getCell(data[R][C], cellRef, ws);
@@ -159,8 +159,8 @@ var excelSheetFromAoA = function excelSheetFromAoA(data) {
     var ws = {};
     var range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
 
-    for (var R = 0; R != data.length; ++R) {
-        for (var C = 0; C != data[R].length; ++C) {
+    for (var R = 0; R !== data.length; ++R) {
+        for (var C = 0; C !== data[R].length; ++C) {
             if (range.s.r > R) {
                 range.s.r = R;
             }

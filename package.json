@@ -1,12 +1,12 @@
 {
-  "name": "react-data-export",
-  "version": "0.6.0",
+  "name": "react-excel-export",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "description": "A set of tools to export dataset from react to different formats.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/securedeveloper/react-data-export.git"
+    "url": "git+https://github.com/AS-Devs/react-excel-export.git"
   },
   "keywords": [
     "react-data-export",
@@ -14,63 +14,45 @@
     "react-export",
     "react-excel-export"
   ],
-  "author": "Afzal Ahmad <securedeveloper@gmail.com>",
+  "author": "AS Developers",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/securedeveloper/react-data-export/issues"
+    "url": "https://github.com/AS-Devs/react-excel-export/issues"
   },
-  "homepage": "https://github.com/securedeveloper/react-data-export#readme",
+  "homepage": "https://github.com/AS-Devs/react-excel-export#readme",
   "dependencies": {
-    "file-saver": "1.3.3",
+    "file-saver": "2.0.5",
     "tempa-xlsx": "0.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "6.1.3",
-    "@commitlint/config-conventional": "6.1.3",
     "babel-cli": "6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "8.0.1",
-    "babel-jest": "22.4.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-register": "6.26.0",
-    "cross-env": "5.1.0",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "eslint": "4.18.2",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jest": "21.14.0",
-    "eslint-plugin-jsx-a11y": "6.0.2",
-    "eslint-plugin-react": "7.4.0",
-    "eslint-watch": "3.1.3",
-    "husky": "0.15.0-rc.13",
-    "jest": "^23.6.0",
-    "jest-environment-node": "22.4.1",
-    "nyc": "11.2.1",
-    "prop-types": "15.6.0",
-    "react": "16.0.0",
-    "react-dom": "16.0.1",
-    "standard-version": "^4.4.0",
-    "xlsx": "^0.14.0"
+    "eslint": "8.41.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-watch": "8.0.0",
+    "prop-types": "15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "xlsx": "file:packages/xlsx-0.19.3.tgz"
+  },
+  "overrides": {
+    "xlsx": "file:packages/xlsx-0.19.3.tgz"
   },
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS",
-    "release": "standard-version",
-    "test": "npm run lint && jest .",
-    "test:coverage": "nyc npm t",
-    "coverage:html": "nyc report --reporter=html",
-    "coverage:publish": "nyc report --reporter=lcov | codecov",
     "clean": "rm -rf ./dist && mkdir ./dist",
-    "build": "npm run test && babel src --out-dir dist",
+    "build": "babel src --out-dir dist",
     "build:watch": "babel -w src --out-dir dist",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:watch": "esw -w lib/**",
-    "prepare": "npm run build"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "prepare": "npm run build",
+    "publish": "npm publish"
   }
 }

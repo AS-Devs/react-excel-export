@@ -1,10 +1,10 @@
 import XLSX from "tempa-xlsx";
 
 const strToArrBuffer = (s) => {
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
 
-    for (var i = 0; i != s.length; ++i) {
+    for (let i = 0; i <= s.length; ++i) {
         view[i] = s.charCodeAt(i) & 0xFF;
     }
 
@@ -16,7 +16,7 @@ const dateToNumber = (v, date1904) => {
         v += 1462;
     }
 
-    var epoch = Date.parse(v);
+    let epoch = Date.parse(v);
 
     return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
 };
@@ -36,30 +36,30 @@ const excelSheetFromDataSet = (dataSet) => {
         return {};
     }
 
-    var ws = {};
-    var range = {s: {c: 10000000, r: 10000000}, e: {c: 0, r: 0}};
-    var rowCount = 0;
+    let ws = {};
+    let range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
+    let rowCount = 0;
 
     dataSet.forEach(dataSetItem => {
-        var columns = dataSetItem.columns;
-        var xSteps = typeof(dataSetItem.xSteps) === 'number' ? dataSetItem.xSteps : 0;
-        var ySteps = typeof(dataSetItem.ySteps) === 'number' ? dataSetItem.ySteps : 0;
-        var data = dataSetItem.data;
+        let columns = dataSetItem.columns;
+        let xSteps = typeof(dataSetItem.xSteps) === 'number' ? dataSetItem.xSteps : 0;
+        let ySteps = typeof(dataSetItem.ySteps) === 'number' ? dataSetItem.ySteps : 0;
+        let data = dataSetItem.data;
         if (dataSet === undefined || dataSet.length === 0) {
             return;
         }
 
         rowCount += ySteps;
 
-        var columnsWidth = []
+        var columnsWidth = [];
         if (columns.length >= 0) {
             columns.forEach((col, index) => {
-                var cellRef = XLSX.utils.encode_cell({c: xSteps + index, r: rowCount});
+                var cellRef = XLSX.utils.encode_cell({ c: xSteps + index, r: rowCount });
                 fixRange(range, 0, 0, rowCount, xSteps, ySteps);
                 var colTitle = col;
                 if (typeof col === 'object'){
                     //colTitle = col.title; //moved to getHeaderCell
-                    columnsWidth.push(col.width || {wpx:80}); /* wch (chars), wpx (pixels) - e.g. [{wch:6},{wpx:50}] */
+                    columnsWidth.push(col.width || { wpx:80 }); /* wch (chars), wpx (pixels) - e.g. [{wch:6},{wpx:50}] */
                 }
                 getHeaderCell(colTitle, cellRef, ws);
             });
@@ -71,9 +71,9 @@ const excelSheetFromDataSet = (dataSet) => {
             ws['!cols'] = columnsWidth;
         }
 
-        for (var R = 0; R != data.length; ++R, rowCount++) {
-            for (var C = 0; C != data[R].length; ++C) {
-                var cellRef = XLSX.utils.encode_cell({c: C + xSteps, r: rowCount});
+        for (var R = 0; R !== data.length; ++R, rowCount++) {
+            for (var C = 0; C !== data[R].length; ++C) {
+                var cellRef = XLSX.utils.encode_cell({ c: C + xSteps, r: rowCount });
                 fixRange(range, R, C, rowCount, xSteps, ySteps);
                 getCell(data[R][C], cellRef, ws);
             }
@@ -98,7 +98,7 @@ function getHeaderCell(v, cellRef, ws) {
 
 function getCell(v, cellRef, ws) {
     //assume v is indeed the value. for other cases (object, date...) it will be overriden.
-    var cell = {v};
+    var cell = { v };
     if (v === null) {
         return;
     }
@@ -144,11 +144,11 @@ function fixRange(range, R, C, rowCount, xSteps, ySteps) {
 }
 
 const excelSheetFromAoA = (data) => {
-    var ws = {};
-    var range = {s: {c: 10000000, r: 10000000}, e: {c: 0, r: 0}};
+    let ws = {};
+    let range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
 
-    for (var R = 0; R != data.length; ++R) {
-        for (var C = 0; C != data[R].length; ++C) {
+    for (let R = 0; R !== data.length; ++R) {
+        for (let C = 0; C !== data[R].length; ++C) {
             if (range.s.r > R) {
                 range.s.r = R;
             }
@@ -165,12 +165,12 @@ const excelSheetFromAoA = (data) => {
                 range.e.c = C;
             }
 
-            var cell = {v: data[R][C]};
+            var cell = { v: data[R][C] };
             if (cell.v === null) {
                 continue;
             }
 
-            var cellRef = XLSX.utils.encode_cell({c: C, r: R});
+            var cellRef = XLSX.utils.encode_cell({ c: C, r: R });
             if (typeof cell.v === 'number') {
                 cell.t = 'n';
             } else if (typeof cell.v === 'boolean') {
@@ -195,4 +195,4 @@ const excelSheetFromAoA = (data) => {
 };
 
 
-export {strToArrBuffer, dateToNumber, excelSheetFromAoA, excelSheetFromDataSet};
+export { strToArrBuffer, dateToNumber, excelSheetFromAoA, excelSheetFromDataSet };

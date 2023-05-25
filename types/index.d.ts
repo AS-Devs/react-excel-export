@@ -8,7 +8,7 @@ declare module 'react-data-export' {
     filename?: string;
     fileExtension?: string;
     element?: any; //Download Element
-    children?: Array<React.ReactChild> | React.ReactChild; // Array<ExcelSheetProps>;
+    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
   }
 
   export interface ExcelSheetProps {
@@ -16,7 +16,7 @@ declare module 'react-data-export' {
     data?: Array<object>;
     dataSet?: Array<ExcelSheetData>;
     value?: Array<string> | Function;
-    children?: Array<React.ReactChild> | React.ReactChild; // Array<ExcelColumnProps>
+    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelColumnProps>
   }
 
   export interface ExcelSheetData {
