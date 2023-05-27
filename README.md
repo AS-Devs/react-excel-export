@@ -1,4 +1,4 @@
-# React-Excel-Export
+# React-XLSX-wrapper
 
 [![npm version](https://badge.fury.io/js/react-data-export.svg)](https://badge.fury.io/js/react-data-export)
 [![dependencies Status](https://david-dm.org/securedeveloper/react-data-export/status.svg)](https://david-dm.org/securedeveloper/react-data-export)
@@ -10,11 +10,18 @@
 A data export library built with and for [React](http://facebook.github.io/react/index.html).
 
 ## Installation
-
-With [npm](https://www.npmjs.org/package/react-data-export):
+With [npm](https://www.npmjs.org/package/react-xlsx-wrapper):
 
 ```sh
-npm install --save react-data-export
+npm install --save react-xlsx-wrapper
+```
+
+```sh
+pnpm add react-xlsx-wrapper
+```
+
+```sh
+yarn add react-xlsx-wrapper
 ```
 
 ## Code Examples
@@ -121,7 +128,7 @@ Borders for merged areas are specified for each cell within the merged area. So 
 
 ## Dependencies
 
-This library uses [file-saver](https://www.npmjs.com/package/file-saver) and [xlsx](https://www.npmjs.com/package/xlsx) and using [json-loader](https://www.npmjs.com/package/json-loader) will do the magic for you.
+This library uses [file-saver](https://www.npmjs.com/package/file-saver) and [xlsx-0.19.3](https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz) and using [json-loader](https://www.npmjs.com/package/json-loader) will do the magic for you.
 
 ```javascript
 ///webpack.config.js

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { saveAs } from "file-saver";
-import XLSX from "tempa-xlsx";
+import XLSX from "xlsx";
 
 import ExcelSheet from "../elements/ExcelSheet";
 import { strToArrBuffer, excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
@@ -79,7 +79,7 @@ class ExcelFile extends React.Component {
 
         const fileExtension = this.getFileExtension();
         const fileName = this.getFileName();
-        const wbout = XLSX.write(wb, { bookType: fileExtension, bookSST: true, type: 'binary' });
+        const wbout = XLSX.write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
 
         saveAs(new Blob([strToArrBuffer(wbout)], { type: "application/octet-stream" }), fileName);
     }
