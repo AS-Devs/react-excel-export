@@ -1,7 +1,7 @@
 /* index.d.ts (C) react-data-export */
 
 // TypeScript Version: 2.2
-declare module 'react-data-export' {
+declare module 'react-xlsx-wrapper' {
   import * as React from 'react'
 
   export interface ExcelFileProps {

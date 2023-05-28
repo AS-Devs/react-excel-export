@@ -1,4 +1,4 @@
-import XLSX from "xlsx";
+import { utils, SSF } from "xlsx-js-style";
 
 const strToArrBuffer = (s) => {
     let buf = new ArrayBuffer(s.length);
@@ -54,12 +54,12 @@ const excelSheetFromDataSet = (dataSet) => {
         var columnsWidth = [];
         if (columns.length >= 0) {
             columns.forEach((col, index) => {
-                var cellRef = XLSX.utils.encode_cell({ c: xSteps + index, r: rowCount });
+                var cellRef = utils.encode_cell({ c: xSteps + index, r: rowCount });
                 fixRange(range, 0, 0, rowCount, xSteps, ySteps);
                 var colTitle = col;
                 if (typeof col === 'object'){
                     //colTitle = col.title; //moved to getHeaderCell
-                    columnsWidth.push(col.width || { wpx:80 }); /* wch (chars), wpx (pixels) - e.g. [{wch:6},{wpx:50}] */
+                    columnsWidth.push(col.width || { wpx: 100 }); /* wch (chars), wpx (pixels) - e.g. [{wch:6},{wpx:50}] */
                 }
                 getHeaderCell(colTitle, cellRef, ws);
             });
@@ -73,7 +73,7 @@ const excelSheetFromDataSet = (dataSet) => {
 
         for (var R = 0; R !== data.length; ++R, rowCount++) {
             for (var C = 0; C !== data[R].length; ++C) {
-                var cellRef = XLSX.utils.encode_cell({ c: C + xSteps, r: rowCount });
+                var cellRef = utils.encode_cell({ c: C + xSteps, r: rowCount });
                 fixRange(range, R, C, rowCount, xSteps, ySteps);
                 getCell(data[R][C], cellRef, ws);
             }
@@ -81,7 +81,7 @@ const excelSheetFromDataSet = (dataSet) => {
     });
 
     if (range.s.c < 10000000) {
-        ws['!ref'] = XLSX.utils.encode_range(range);
+        ws['!ref'] = utils.encode_range(range);
     }
 
     return ws;
@@ -117,7 +117,7 @@ function getCell(v, cellRef, ws) {
         cell.t = 'b';
     } else if (isDate) {
         cell.t = 'n';
-        cell.z = XLSX.SSF._table[14];
+        cell.z = SSF._table[14];
         cell.v = dateToNumber(cell.v);
     } else {
         cell.t = 's';
@@ -170,14 +170,14 @@ const excelSheetFromAoA = (data) => {
                 continue;
             }
 
-            var cellRef = XLSX.utils.encode_cell({ c: C, r: R });
+            var cellRef = utils.encode_cell({ c: C, r: R });
             if (typeof cell.v === 'number') {
                 cell.t = 'n';
             } else if (typeof cell.v === 'boolean') {
                 cell.t = 'b';
             } else if (cell.v instanceof Date) {
                 cell.t = 'n';
-                cell.z = XLSX.SSF._table[14];
+                cell.z = SSF._table[14];
                 cell.v = dateToNumber(cell.v);
             } else {
                 cell.t = 's';
@@ -188,7 +188,7 @@ const excelSheetFromAoA = (data) => {
     }
 
     if (range.s.c < 10000000) {
-        ws['!ref'] = XLSX.utils.encode_range(range);
+        ws['!ref'] = utils.encode_range(range);
     }
 
     return ws;

@@ -14,11 +14,7 @@ var _propTypes = require("prop-types");
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _fileSaver = require("file-saver");
-
-var _xlsx = require("xlsx");
-
-var _xlsx2 = _interopRequireDefault(_xlsx);
+var _xlsxJsStyle = require("xlsx-js-style");
 
 var _ExcelSheet = require("../elements/ExcelSheet");
 
@@ -101,9 +97,7 @@ var ExcelFile = function (_React$Component) {
 
             var fileExtension = this.getFileExtension();
             var fileName = this.getFileName();
-            var wbout = _xlsx2.default.write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
-
-            (0, _fileSaver.saveAs)(new Blob([(0, _DataUtil.strToArrBuffer)(wbout)], { type: "application/octet-stream" }), fileName);
+            (0, _xlsxJsStyle.writeFile)(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
         }
     }, {
         key: "getFileName",

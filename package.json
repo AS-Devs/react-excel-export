@@ -1,6 +1,6 @@
 {
   "name": "react-xlsx-wrapper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "description": "A set of tools to export dataset from react to different formats.",
@@ -14,15 +14,14 @@
     "react-export",
     "react-excel-export"
   ],
-  "author": "AS Developers",
+  "author": "AS Developers <hi@asdevs.dev>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AS-Devs/react-excel-export/issues"
   },
   "homepage": "https://github.com/AS-Devs/react-excel-export#readme",
   "dependencies": {
-    "file-saver": "2.0.5",
-    "xlsx": "file:./packages/xlsx-0.19.3.tgz"
+    "xlsx-js-style": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

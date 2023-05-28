@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { saveAs } from "file-saver";
-import XLSX from "xlsx";
+import { writeFile } from "xlsx-js-style";
 
 import ExcelSheet from "../elements/ExcelSheet";
-import { strToArrBuffer, excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
+import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
 
 class ExcelFile extends React.Component {
     static props = {
@@ -79,9 +78,8 @@ class ExcelFile extends React.Component {
 
         const fileExtension = this.getFileExtension();
         const fileName = this.getFileName();
-        const wbout = XLSX.write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
+        writeFile(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
 
-        saveAs(new Blob([strToArrBuffer(wbout)], { type: "application/octet-stream" }), fileName);
     }
 
     getFileName() {

@@ -1,46 +1,43 @@
-# Contributor Covenant Code of Conduct
+# Code of Conduct
+
+## Introduction
+As contributors and maintainers of this open-source package, we are committed to fostering an inclusive and welcoming community for everyone. This Code of Conduct outlines our expectations for all participants in contributing to and interacting with this project. We value collaboration, respect, and professionalism in all interactions.
 
 ## Our Pledge
+In order to create a positive and productive environment, we pledge to:
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+- Be welcoming and inclusive to individuals of all backgrounds and identities.
+- Show respect and empathy towards others.
+- Foster a community where everyone feels comfortable and safe to express their ideas and opinions.
+- Encourage constructive discussions and collaborations.
+- Address conflicts and disagreements in a respectful and solution-oriented manner.
+- Respect the privacy and confidentiality of others.
+- Be accountable for our actions and words.
 
-## Our Standards
+## Expected Behavior
+To contribute to a positive environment, we expect all participants to:
 
-Examples of behavior that contributes to creating a positive environment include:
+- Be considerate, respectful, and inclusive in their language and actions.
+- Exercise empathy towards others' experiences and perspectives.
+- Accept constructive criticism and provide feedback in a courteous manner.
+- Be open to different ideas, viewpoints, and experiences.
+- Refrain from any form of harassment, discrimination, or disrespectful behavior.
+- Respect the boundaries and guidelines set by the project maintainers.
+- Help create a welcoming environment for all participants.
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+## Excel Styling and Data Export
+This open-source package supports Excel styling and data export to various formats, including XLSX and CSV. We encourage contributors to follow best practices and guidelines when implementing these features. When working on styling functionality, consider supporting features like font formatting, cell background color, borders, and other relevant styling options. When exporting data, ensure compatibility with widely-used formats and provide configurable options for customization.
 
-Examples of unacceptable behavior by participants include:
+## Consequences of Unacceptable Behavior
+Unacceptable behavior will not be tolerated within our community. Maintainers have the right and responsibility to address any behavior that they deem inappropriate, threatening, offensive, or harmful. Consequences for unacceptable behavior may include warning, temporary or permanent bans, and reporting the behavior to appropriate authorities if necessary.
 
-* The use of sexualized language or imagery and unwelcome sexual attention or advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+## Reporting Violations
+If you witness or experience any behavior that violates this Code of Conduct, please report it to the project maintainers by contacting [email address or any other preferred method of communication]. All reports will be handled with confidentiality, and the maintainers will review and address the issue promptly.
 
-## Our Responsibilities
+## Acknowledgment
+We are grateful to the contributors and users who uphold our Code of Conduct and create a positive and inclusive community. By following this Code of Conduct, we can work together to ensure an enjoyable and productive environment for everyone involved.
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+---
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+This Code of Conduct is inspired by the [Contributor Covenant](https://www.contributor-covenant.org), version 2.0.
 
-## Scope
-
-This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
-
-## Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at securedeveloper@gmail.com. The project team will review and investigate all complaints, and will respond in a way that it deems appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
-
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
-
-## Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
-
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
