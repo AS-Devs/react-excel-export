@@ -24,7 +24,7 @@ declare module 'react-xlsx-wrapper' {
     xSteps?: number;
     ySteps?: number;
     columns: any[];
-    data: ExcelCellData[];
+    data: any[];
   }
 
   export interface ExcelSheetCol {
