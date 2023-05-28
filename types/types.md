@@ -1,7 +1,4 @@
 ```javascript
-/* index.d.ts (C) react-data- */
-
-// TypeScript Version: 2.2
 
 interface ExcelFileProps {
     filename?: string;

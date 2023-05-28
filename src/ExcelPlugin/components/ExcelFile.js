@@ -70,9 +70,11 @@ class ExcelFile extends React.Component {
         // };
 
         const wb = utils.book_new();
+        const fileName = this.getFileName();
+        const fileExtension = this.getFileExtension();
 
         React.Children.forEach(this.props.children, sheet => {
-            const ws = {};
+            let ws = {};
             const wsName = sheet.props.name || fileName.split('.')[0] || 'Sheet1';
             if (typeof sheet.props.dataSet === 'undefined' || sheet.props.dataSet.length === 0) {
                 ws = excelSheetFromAoA(this.createSheetData(sheet));
@@ -83,8 +85,6 @@ class ExcelFile extends React.Component {
             utils.book_append_sheet(wb, ws, wsName);
         });
 
-        const fileExtension = this.getFileExtension();
-        const fileName = this.getFileName();
 
         write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
         saveAs(new Blob([utils.s2ab(wb)], { type: 'application/octet-stream' }), fileName);

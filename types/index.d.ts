@@ -8,14 +8,14 @@ declare module 'react-xlsx-wrapper' {
   export interface ExcelFileProps {
     filename?: string;
     fileExtension?: string;
-    element?: any; //Download Element
+    element?: React.ReactElement; //Download Element
     children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
   }
 
   export interface ExcelSheetProps {
     name: string;
-    data?: ExcelSheetData[];
-    dataSet?: ExcelSheetData[];
+    data?: Array<Object>;
+    dataSet?: Array<ExcelSheetData>;
     value?: string[] | Function;
     children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelColumnProps>
   }
