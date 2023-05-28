@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { utils, write } from "xlsx-js-style";
+import { utils, writeFile } from "xlsx-js-style";
 import { saveAs } from 'file-saver';
 import ExcelSheet from "../elements/ExcelSheet";
 import { excelSheetFromAoA, excelSheetFromDataSet, strToArrBuffer } from "../utils/DataUtil";
@@ -63,12 +63,6 @@ class ExcelFile extends React.Component {
     }
 
     download() {
-        // Older Code - might delete later
-        // const wb = {
-        //     SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
-        //     Sheets: {}
-        // };
-
         const wb = utils.book_new();
         const fileName = this.getFileName();
         const fileExtension = this.getFileExtension();
@@ -86,8 +80,9 @@ class ExcelFile extends React.Component {
         });
 
 
-        write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
-        saveAs(new Blob([strToArrBuffer(wb)], { type: 'application/octet-stream' }), fileName);
+        writeFile(wb, fileName, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
+        // saveAs(new Blob([strToArrBuffer(wb)], { type: 'application/octet-stream' }), fileName);
+
     }
         
     
@@ -96,7 +91,7 @@ class ExcelFile extends React.Component {
         if (this.props.filename === null || typeof this.props.filename !== 'string') {
             throw Error('Invalid file name provided');
         }
-        return this.getFileNameWithExtension(this.props.filename, this.getFileExtension());
+        return this.getFileNameWithExtension(this.props.filename?.split('.')[0], this.getFileExtension());
     }
 
     getFileExtension() {

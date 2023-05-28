@@ -67,12 +67,6 @@ var ExcelFile = /*#__PURE__*/function (_React$Component) {
     key: "download",
     value: function download() {
       var _this2 = this;
-      // Older Code - might delete later
-      // const wb = {
-      //     SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
-      //     Sheets: {}
-      // };
-
       var wb = _xlsxJsStyle.utils.book_new();
       var fileName = this.getFileName();
       var fileExtension = this.getFileExtension();
@@ -87,23 +81,22 @@ var ExcelFile = /*#__PURE__*/function (_React$Component) {
         // add worksheet to workbook
         _xlsxJsStyle.utils.book_append_sheet(wb, ws, wsName);
       });
-      (0, _xlsxJsStyle.write)(wb, {
+      (0, _xlsxJsStyle.writeFile)(wb, fileName, {
         bookType: fileExtension,
         bookSST: true,
         type: 'binary',
         cellStyles: true
       });
-      (0, _fileSaver.saveAs)(new Blob([_xlsxJsStyle.utils.s2ab(wb)], {
-        type: 'application/octet-stream'
-      }), fileName);
+      // saveAs(new Blob([strToArrBuffer(wb)], { type: 'application/octet-stream' }), fileName);
     }
   }, {
     key: "getFileName",
     value: function getFileName() {
+      var _this$props$filename;
       if (this.props.filename === null || typeof this.props.filename !== 'string') {
         throw Error('Invalid file name provided');
       }
-      return this.getFileNameWithExtension(this.props.filename, this.getFileExtension());
+      return this.getFileNameWithExtension((_this$props$filename = this.props.filename) === null || _this$props$filename === void 0 ? void 0 : _this$props$filename.split('.')[0], this.getFileExtension());
     }
   }, {
     key: "getFileExtension",

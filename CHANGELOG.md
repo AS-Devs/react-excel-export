@@ -6,6 +6,14 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v1.1.2
+
+* Excel file is corrupt. Need to investigate.
+
+
+## v1.1.1
+
+* Minor Error Fixed
 
 ## v1.1.0
 
