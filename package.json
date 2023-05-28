@@ -1,6 +1,6 @@
 {
   "name": "react-xlsx-wrapper",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "description": "A set of tools to export dataset from react to different formats.",

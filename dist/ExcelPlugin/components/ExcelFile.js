@@ -11,6 +11,7 @@ var _ExcelSheet = _interopRequireDefault(require("../elements/ExcelSheet"));
 var _DataUtil = require("../utils/DataUtil");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -66,22 +67,27 @@ var ExcelFile = /*#__PURE__*/function (_React$Component) {
     key: "download",
     value: function download() {
       var _this2 = this;
-      var wb = {
-        SheetNames: _react.default.Children.map(this.props.children, function (sheet) {
-          return sheet.props.name;
-        }),
-        Sheets: {}
-      };
+      // Older Code - might delete later
+      // const wb = {
+      //     SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
+      //     Sheets: {}
+      // };
+
+      var wb = _xlsxJsStyle.utils.book_new();
       _react.default.Children.forEach(this.props.children, function (sheet) {
+        var ws = {};
+        var wsName = sheet.props.name || fileName.split('.')[0] || 'Sheet1';
         if (typeof sheet.props.dataSet === 'undefined' || sheet.props.dataSet.length === 0) {
-          wb.Sheets[sheet.props.name] = (0, _DataUtil.excelSheetFromAoA)(_this2.createSheetData(sheet));
+          (0, _DataUtil.excelSheetFromAoA)(_this2.createSheetData(sheet)), _readOnlyError("ws");
         } else {
-          wb.Sheets[sheet.props.name] = (0, _DataUtil.excelSheetFromDataSet)(sheet.props.dataSet);
+          (0, _DataUtil.excelSheetFromDataSet)(sheet.props.dataSet), _readOnlyError("ws");
         }
+        // add worksheet to workbook
+        _xlsxJsStyle.utils.book_append_sheet(wb, ws, wsName);
       });
       var fileExtension = this.getFileExtension();
       var fileName = this.getFileName();
-      (0, _xlsxJsStyle.writeFile)(wb, {
+      (0, _xlsxJsStyle.writeFile)(wb, fileName, {
         bookType: fileExtension,
         bookSST: true,
         type: 'binary',

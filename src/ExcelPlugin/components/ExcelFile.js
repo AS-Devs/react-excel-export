@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { writeFile } from "xlsx-js-style";
+import { writeFile, utils } from "xlsx-js-style";
 
 import ExcelSheet from "../elements/ExcelSheet";
 import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
@@ -63,23 +63,30 @@ class ExcelFile extends React.Component {
     }
 
     download() {
-        const wb = {
-            SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
-            Sheets: {}
-        };
+        // Older Code - might delete later
+        // const wb = {
+        //     SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
+        //     Sheets: {}
+        // };
+
+        const wb = utils.book_new();
 
         React.Children.forEach(this.props.children, sheet => {
+            const ws = {};
+            const wsName = sheet.props.name || fileName.split('.')[0] || 'Sheet1';
             if (typeof sheet.props.dataSet === 'undefined' || sheet.props.dataSet.length === 0) {
-                wb.Sheets[sheet.props.name] = excelSheetFromAoA(this.createSheetData(sheet));
+                ws = excelSheetFromAoA(this.createSheetData(sheet));
             } else {
-                wb.Sheets[sheet.props.name] = excelSheetFromDataSet(sheet.props.dataSet);
+                ws = excelSheetFromDataSet(sheet.props.dataSet);
             }
+            // add worksheet to workbook
+            utils.book_append_sheet(wb, ws, wsName);
         });
 
         const fileExtension = this.getFileExtension();
         const fileName = this.getFileName();
-        writeFile(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
 
+        writeFile(wb, fileName, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
     }
 
     getFileName() {
