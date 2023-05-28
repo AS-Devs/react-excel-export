@@ -1,27 +1,22 @@
 # React-XLSX-wrapper
 
-[![npm version](https://badge.fury.io/js/react-data-export.svg)](https://badge.fury.io/js/react-data-export)
-[![dependencies Status](https://david-dm.org/securedeveloper/react-data-export/status.svg)](https://david-dm.org/securedeveloper/react-data-export)
-[![devDependencies Status](https://david-dm.org/securedeveloper/react-data-export/dev-status.svg)](https://david-dm.org/securedeveloper/react-data-export?type=dev)
-[![Build Status](https://travis-ci.org/securedeveloper/react-data-export.svg?branch=master)](https://travis-ci.org/securedeveloper/react-data-export)
-[![Vulnerabilities](https://snyk.io/test/github/securedeveloper/react-data-export/badge.svg)](https://snyk.io/test/github/securedeveloper/react-data-export)
-[![Coverage Status](https://coveralls.io/repos/github/securedeveloper/react-data-export/badge.svg?branch=master)](https://coveralls.io/github/securedeveloper/react-data-export?branch=master)
+[![npm version](https://badge.fury.io/js/react-xlsx-wrapper.svg)](https://badge.fury.io/js/react-xlsx-wrapper)
 
-A data export library built with and for [React](http://facebook.github.io/react/index.html).
+A data export library built with and for [React](https://react.dev/), [Next.js](https://nextjs.org/)
 
 ## Installation
 With [npm](https://www.npmjs.org/package/react-xlsx-wrapper):
 
 ```sh
-npm install --save react-xlsx-wrapper
+npm install --save react-xlsx-wrapper@latest
 ```
 
 ```sh
-pnpm add react-xlsx-wrapper
+pnpm add react-xlsx-wrapper@latest
 ```
 
 ```sh
-yarn add react-xlsx-wrapper
+yarn add react-xlsx-wrapper@latest
 ```
 
 ## Code Examples
@@ -126,21 +121,3 @@ Borders for merged areas are specified for each cell within the merged area. So 
 - top borders for the cells on the top
 - bottom borders for the cells on the left
 
-## Dependencies
-
-This library uses [file-saver](https://www.npmjs.com/package/file-saver) and [xlsx-0.19.3](https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz) and using [json-loader](https://www.npmjs.com/package/json-loader) will do the magic for you.
-
-```javascript
-///webpack.config.js
-vendor: [
-        .....
-        'xlsx',
-        'file-saver'
-],
-.....
-node: {fs: 'empty'},
-externals: [
-    {'./cptable': 'var cptable'},
-    {'./jszip': 'jszip'}
- ]
-```
