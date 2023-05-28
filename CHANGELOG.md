@@ -6,6 +6,9 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v1.1.4
+
+* Removed TS config for MultidataSet prop as any. column has some issue. I will check it later...
 
 ## v1.1.3
 
