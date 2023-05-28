@@ -6,6 +6,12 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v1.0.5
+
+* Remove older babel packages
+* Upgraded all bebel packages and config
+* Example Import changed
+
 ## v1.0.4
 
 * Remove XLSX package

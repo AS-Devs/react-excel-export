@@ -1,6 +1,6 @@
 ```javascript
 import React from "react";
-import {ExcelFile, ExcelSheet} from "react-data-export";
+import {ExcelFile, ExcelSheet} from 'react-xlsx-wrapper';
 
 const multiDataSet = [
     {

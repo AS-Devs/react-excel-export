@@ -1,17 +1,15 @@
-/* index.d.ts (C) react-data-export */
-
-// TypeScript Version: 2.2
 declare module 'react-xlsx-wrapper' {
   import * as React from 'react'
-
-  export interface ExcelFileProps {
+  export interface ExcelFile {
+    ExcelSheet: ExcelSheet;
+    ExcelColumn: ExcelColumn;
+    element?: React.ReactElement;
     filename?: string;
     fileExtension?: string;
-    element?: any; //Download Element
-    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
+    children?: Array<React.ReactElement> | React.ReactElement;
   }
 
-  export interface ExcelSheetProps {
+  export interface ExcelSheet {
     name: string;
     data?: Array<object>;
     dataSet?: Array<ExcelSheetData>;
@@ -34,7 +32,7 @@ declare module 'react-xlsx-wrapper' {
     style: ExcelStyle;
   }
 
-  export interface ExcelColumnProps {
+  export interface ExcelColumn {
     label: string;
     value: number | boolean | string | Function;
   }

@@ -1,10 +1,6 @@
 ```javascript
 import React from "react";
-import ReactExport from "react-data-export";
-
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+import {ExcelFile, ExcelSheet, ExcelColumn} from 'react-xlsx-wrapper';
 
 const dataSet1 = [
     {
@@ -67,6 +63,3 @@ class Download extends React.Component {
     }
 }
 ```
-
-## Output
-![Simple Excel Export with Custom Download Button](http://i65.tinypic.com/29y3qt.jpg)
