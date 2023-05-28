@@ -6,9 +6,14 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+
+## v1.1.3
+
+* Removed File Saver as a dependency.
+
 ## v1.1.2
 
-* Excel file is corrupt. Need to investigate.
+* Excel file generating properly
 
 
 ## v1.1.1
