@@ -23,8 +23,21 @@ declare module 'react-xlsx-wrapper' {
   export interface ExcelSheetData {
     xSteps?: number;
     ySteps?: number;
-    columns: string[];
+    columns: string[] | ExcelSheetCol[];
     data: ExcelCellData[];
+  }
+
+  export interface ExcelSheetCol {
+    title: string;
+    width?: ExcelWidth;
+  }
+
+  export interface ExcelWidth {
+   /** width in screen pixels */
+   wpx?: number;
+
+   /** width in "characters" */
+   wch?: number;
   }
 
   export type ExcelCellData = ExcelValue | ExcelCell | Array<ExcelValue>;

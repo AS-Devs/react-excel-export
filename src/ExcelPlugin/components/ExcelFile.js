@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { writeFile, utils } from "xlsx-js-style";
-
+import { utils, write } from "xlsx-js-style";
+import { saveAs } from 'file-saver';
 import ExcelSheet from "../elements/ExcelSheet";
 import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
 
@@ -86,8 +86,11 @@ class ExcelFile extends React.Component {
         const fileExtension = this.getFileExtension();
         const fileName = this.getFileName();
 
-        writeFile(wb, fileName, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
+        write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
+        saveAs(new Blob([utils.s2ab(wb)], { type: 'application/octet-stream' }), fileName);
     }
+        
+    
 
     getFileName() {
         if (this.props.filename === null || typeof this.props.filename !== 'string') {

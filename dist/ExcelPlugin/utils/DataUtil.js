@@ -105,7 +105,7 @@ function getHeaderCell(v, cellRef, ws) {
       bold: true
     }
   }; //if style is then use it
-  cell.v = v.title;
+  cell.v = v.title || v;
   cell.t = 's';
   cell.s = headerCellStyle;
   ws[cellRef] = cell;

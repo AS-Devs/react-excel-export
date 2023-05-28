@@ -7,6 +7,7 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _xlsxJsStyle = require("xlsx-js-style");
+var _fileSaver = require("file-saver");
 var _ExcelSheet = _interopRequireDefault(require("../elements/ExcelSheet"));
 var _DataUtil = require("../utils/DataUtil");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -87,12 +88,15 @@ var ExcelFile = /*#__PURE__*/function (_React$Component) {
       });
       var fileExtension = this.getFileExtension();
       var fileName = this.getFileName();
-      (0, _xlsxJsStyle.writeFile)(wb, fileName, {
+      (0, _xlsxJsStyle.write)(wb, {
         bookType: fileExtension,
         bookSST: true,
         type: 'binary',
         cellStyles: true
       });
+      (0, _fileSaver.saveAs)(new Blob([_xlsxJsStyle.utils.s2ab(wb)], {
+        type: 'application/octet-stream'
+      }), fileName);
     }
   }, {
     key: "getFileName",

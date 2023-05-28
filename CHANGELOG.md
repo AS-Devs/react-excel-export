@@ -6,6 +6,11 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v1.0.8
+
+* Types changed.
+* I hope to resolve this ts related issue.
+
 ## v1.0.7
 
 * Changed the structure.
