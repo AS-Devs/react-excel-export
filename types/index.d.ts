@@ -1,27 +1,30 @@
 declare module 'react-xlsx-wrapper' {
   import * as React from 'react'
   export interface ExcelFile {
-    ExcelSheet: ExcelSheet;
-    ExcelColumn: ExcelColumn;
-    element?: React.ReactElement;
-    filename?: string;
-    fileExtension?: string;
-    children?: Array<React.ReactElement> | React.ReactElement;
+    ExcelSheet: ExcelSheetProps;
+    ExcelColumn: ExcelColumnProps;
   }
 
-  export interface ExcelSheet {
+  export interface ExcelFileProps {
+    filename?: string;
+    fileExtension?: string;
+    element?: any; //Download Element
+    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
+  }
+
+  export interface ExcelSheetProps {
     name: string;
-    data?: Array<object>;
-    dataSet?: Array<ExcelSheetData>;
-    value?: Array<string> | Function;
+    data?: ExcelSheetData[];
+    dataSet?: ExcelSheetData[];
+    value?: string[] | Function;
     children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelColumnProps>
   }
 
   export interface ExcelSheetData {
     xSteps?: number;
     ySteps?: number;
-    columns: Array<string>;
-    data: Array<ExcelCellData>;
+    columns: string[];
+    data: ExcelCellData[];
   }
 
   export type ExcelCellData = ExcelValue | ExcelCell | Array<ExcelValue>;
@@ -32,7 +35,7 @@ declare module 'react-xlsx-wrapper' {
     style: ExcelStyle;
   }
 
-  export interface ExcelColumn {
+  export interface ExcelColumnProps {
     label: string;
     value: number | boolean | string | Function;
   }
