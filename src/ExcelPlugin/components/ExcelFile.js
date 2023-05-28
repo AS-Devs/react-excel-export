@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { utils, write } from "xlsx-js-style";
 import { saveAs } from 'file-saver';
 import ExcelSheet from "../elements/ExcelSheet";
-import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
+import { excelSheetFromAoA, excelSheetFromDataSet, strToArrBuffer } from "../utils/DataUtil";
 
 class ExcelFile extends React.Component {
     static props = {
@@ -87,7 +87,7 @@ class ExcelFile extends React.Component {
 
 
         write(wb, { bookType: fileExtension, bookSST: true, type: 'binary', cellStyles: true });
-        saveAs(new Blob([utils.s2ab(wb)], { type: 'application/octet-stream' }), fileName);
+        saveAs(new Blob([strToArrBuffer(wb)], { type: 'application/octet-stream' }), fileName);
     }
         
     
