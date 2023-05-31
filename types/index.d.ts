@@ -1,7 +1,12 @@
 declare module 'react-xlsx-wrapper' {
-  import * as React from 'react'
+  import * as React from 'react';
+
+  export type DataProps = {
+    [key: string]: ExcelValue;
+  };
+
   export interface ExcelFile {
-    ExcelSheet: ExcelSheetProps;
+    ExcelSheet: ExcelSheetProps<DataProps|undefined, ExcelSheetData|undefined>;
     ExcelColumn: ExcelColumnProps;
   }
 
@@ -12,24 +17,25 @@ declare module 'react-xlsx-wrapper' {
     children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
   }
 
-  export interface ExcelSheetProps {
+  export interface ExcelSheetProps<D, DS> {
     name: string;
-    data?: Array<Object>;
-    dataSet?: Array<ExcelSheetData>;
-    value?: string[] | Function;
-    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelColumnProps>
+    data?: D[];
+    dataSet?: DS[];
+    value: ExcelValue[] | (() => void);
+    children: React.ReactElement | Array<React.ReactElement>;
   }
 
   export interface ExcelSheetData {
     xSteps?: number;
     ySteps?: number;
-    columns: any[];
-    data: any[];
+    columns: ExcelSheetCol[];
+    data: ExcelCellData[][];
   }
 
   export interface ExcelSheetCol {
     title: string;
     width?: ExcelWidth;
+    style?: ExcelStyle;
   }
 
   export interface ExcelWidth {
@@ -38,19 +44,21 @@ declare module 'react-xlsx-wrapper' {
 
    /** width in "characters" */
    wch?: number;
+    /** hidden column if true, default, false */
+   hidden?: boolean;
   }
 
-  export type ExcelCellData = ExcelValue | ExcelCell | Array<ExcelValue>;
-  export type ExcelValue = string | number | Date | boolean;
+  export type ExcelCellData = ExcelValue | ExcelCell;
+  export type ExcelValue = string | number | boolean | Date;
 
   export interface ExcelCell {
-    value: ExcelCell;
+    value: string | number | boolean | Date;
     style: ExcelStyle;
   }
 
   export interface ExcelColumnProps {
     label: string;
-    value: number | boolean | string | Function;
+    value: ExcelValue;
   }
 
   export interface ExcelStyle {
@@ -134,18 +142,4 @@ declare module 'react-xlsx-wrapper' {
     | "mediumDashDotDot"
     | "slantDashDot";
 
-  export class ExcelColumn extends React.Component<ExcelColumnProps, any> {
-  }
-
-  export class ExcelSheet extends React.Component<ExcelSheetProps, any> {
-  }
-
-  export class ExcelFile extends React.Component<ExcelFileProps, any> {
-  }
-
-  export namespace ReactExport {
-    export class ExcelFile extends React.Component<ExcelFileProps, any> {
-    }
-  }
-  export default ReactExport
 }

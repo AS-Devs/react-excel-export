@@ -1,12 +1,12 @@
 {
   "name": "react-xlsx-wrapper",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "description": "A set of tools to export dataset from react to different formats.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AS-Devs/react-excel-export.git"
+    "url": "git+https://github.com/AS-Devs/react-xlsx-wrapper.git"
   },
   "keywords": [
     "react-xlsx-wrapper",
@@ -15,35 +15,42 @@
     "react-excel-export"
   ],
   "author": "AS Developers <hi@asdevs.dev>",
+  "contributors": [
+    {
+      "name": "Susanta Chakraborty",
+      "email": "susant.vanu7278@gmail.com",
+      "url": "https://susanta.asdevs.dev"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AS-Devs/react-excel-export/issues"
+    "url": "https://github.com/AS-Devs/react-xlsx-wrapper/issues"
   },
-  "homepage": "https://github.com/AS-Devs/react-excel-export#readme",
+  "homepage": "https://github.com/AS-Devs/react-xlsx-wrapper#readme",
   "dependencies": {
     "xlsx-js-style": "^1.2.0"
-  },
-  "peerDependencies": {
-    "prop-types": "15.8.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.22.1",
+    "@babel/plugin-transform-runtime": "^7.22.2",
     "@babel/preset-env": "^7.22.2",
     "@babel/preset-react": "^7.22.3",
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/react": "^18.2.7",
     "eslint": "8.41.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-watch": "8.0.0",
-    "prop-types": "15.8.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
-    "build": "babel src -d dist",
-    "build:watch": "babel -w src -d dist",
+    "build": "tsc && babel src-js -d dist",
+    "build:watch": "babel -w src-js -d dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:watch": "esw -w lib/**",

@@ -1,27 +1,17 @@
 "use strict";
 
+var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "ExcelColumn", {
-  enumerable: true,
-  get: function get() {
-    return _ExcelColumn.default;
-  }
-});
-Object.defineProperty(exports, "ExcelFile", {
-  enumerable: true,
-  get: function get() {
-    return _ExcelFile.default;
-  }
-});
-Object.defineProperty(exports, "ExcelSheet", {
-  enumerable: true,
-  get: function get() {
-    return _ExcelSheet.default;
-  }
-});
-var _ExcelFile = _interopRequireDefault(require("./ExcelPlugin/components/ExcelFile"));
-var _ExcelSheet = _interopRequireDefault(require("./ExcelPlugin/elements/ExcelSheet"));
-var _ExcelColumn = _interopRequireDefault(require("./ExcelPlugin/elements/ExcelColumn"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports.ExcelColumn = exports.ExcelSheet = exports.ExcelFile = void 0;
+var ExcelFileNew_1 = __importDefault(require("./ExcelPlugin/components/ExcelFileNew"));
+exports.ExcelFile = ExcelFileNew_1.default;
+var ExcelSheet_1 = __importDefault(require("./ExcelPlugin/elements/ExcelSheet"));
+exports.ExcelSheet = ExcelSheet_1.default;
+var ExcelColumn_1 = __importDefault(require("./ExcelPlugin/elements/ExcelColumn"));
+exports.ExcelColumn = ExcelColumn_1.default;
