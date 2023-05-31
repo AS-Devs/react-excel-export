@@ -13,7 +13,7 @@ import type {
 interface ExcelFileProps {
   hideElement?: boolean;
   filename?: string;
-  fileExtension?: string;
+  fileExtension?: BookType;
   element?: React.ReactNode;
   children: React.ReactElement<ExcelSheetProps<DataProps, ExcelSheetData>>[];
 }
@@ -25,7 +25,29 @@ const ExcelFile: React.FC<ExcelFileProps> = ({
   element = <button>Download</button>,
   children,
 }) => {
-  const fileExtensions = ["xlsx", "xls", "csv", "txt", "html"];
+  const fileExtensions = [
+    "xlsx",
+    "xlsm",
+    "xlsb",
+    "xls",
+    "xla",
+    "biff2",
+    "biff5",
+    "biff8",
+    "xlml",
+    "ods",
+    "fods",
+    "csv",
+    "txt",
+    "sylk",
+    "slk",
+    "html",
+    "dif",
+    "rtf",
+    "prn",
+    "eth",
+    "dbf",
+  ] as const;
   const defaultFileExtension = "xlsx";
 
   const createSheetData = (
@@ -100,17 +122,24 @@ const ExcelFile: React.FC<ExcelFileProps> = ({
 
   const getFileExtension = (): BookType => {
     let extension = fileExtension;
-
+    if (fileExtensions.indexOf(extension) !== -1) {
+      return extension;
+    }
+    // file Extension not provided, we need to get it from the filename
+    let extFromFileName = "xlsx" satisfies BookType;
     if (extension.length === 0) {
       const slugs = filename.split(".");
       if (slugs.length === 0) {
         throw new Error("Invalid file name provided");
       }
-      extension = slugs[slugs.length - 1];
+      extFromFileName = slugs[slugs.length - 1];
     }
+    const isExtensionValid = fileExtensions.includes(
+      extFromFileName.toLowerCase() as any
+    );
 
-    if (fileExtensions.indexOf(extension) !== -1) {
-      return extension as BookType;
+    if (isExtensionValid) {
+      return extFromFileName as BookType;
     }
 
     return defaultFileExtension;

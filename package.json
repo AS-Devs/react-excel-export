@@ -3,13 +3,18 @@
   "version": "1.1.6",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
-  "description": "A set of tools to export dataset from react to different formats.",
+  "description": "An important tool to make it easy to work with excel file formats. It supports lots of file formats as well. As this an wrapper around JS API for XLSX package. It does supports basic Cell styling as well as width based on characters. etc. Can be used in any Typescript project now, as we have migrated whole library to supports type safety. Best works with ReactJS, NextJS etc.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AS-Devs/react-xlsx-wrapper.git"
   },
   "keywords": [
     "react-xlsx-wrapper",
+    "excel-export",
+    "xlsx",
+    "xls",
+    "csv",
+    "stying",
     "react-dataset",
     "react-export",
     "react-excel-export"

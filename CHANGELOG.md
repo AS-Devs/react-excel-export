@@ -6,6 +6,15 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v1.1.6
+
+* Full Project Migrated to Typescript.
+* Support Full Type Safety now.
+* Add Hide Column attribute in dataSet property.
+* All the imports are now named imports.
+* Examples has updated. Will add screenshots.
+* Readme is changed a little.
+
 ## v1.1.5
 
 * Again Data in DataSet set as any[]. Nothing to done now. If need TS, need fully. Expose TS interface as well. Will do that later.
@@ -70,3 +79,10 @@ changes may not be included if they are not expected to break existing code.
 
 * Include local XLSX package (0.19.3) -- Latest
 * trying out styles with XLSX package
+
+## 1.0.0
+
+* Initial Build.
+* Fix some type definition.
+* trying out styles with XLSX package.
+* Updrade XLSX package.
