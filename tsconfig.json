@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "outDir": "src-js"
+  },
+  "include": ["src/**/*", "types/index.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
