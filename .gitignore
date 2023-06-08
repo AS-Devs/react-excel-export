@@ -3,6 +3,3 @@ node_modules
 *.log
 .idea/
 coverage/
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
