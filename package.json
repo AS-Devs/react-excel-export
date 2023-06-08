@@ -63,7 +63,8 @@
     "lint:fix": "eslint . --fix",
     "lint:watch": "esw -w lib/**",
     "publish": "npm publish",
-    "semantic-release": "semantic-release --branches main"
+    "semantic-release": "semantic-release --branches main",
+    "acp": "git add . && npm run commit && git push"
   },
   "config": {
     "commitizen": {
