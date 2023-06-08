@@ -43,6 +43,7 @@
     "@babel/preset-react": "^7.22.3",
     "@babel/preset-typescript": "^7.21.5",
     "@types/react": "^18.2.7",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.41.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jsx-a11y": "6.7.1",
@@ -50,17 +51,23 @@
     "eslint-watch": "8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "^5.0.4",
-    "semantic-release": "^21.0.3"
+    "semantic-release": "^21.0.3",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
+    "commit": "git-cz",
     "build": "tsc && babel src-js -d dist",
     "build:watch": "babel -w src-js -d dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:watch": "esw -w lib/**",
     "publish": "npm publish",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release --branches main"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
