@@ -1,26 +1,43 @@
-```javascript
+```ts
 
 interface ExcelFileProps {
     filename?: string;
     fileExtension?: string;
-    element?: any;
-    children?: Array<ExcelSheetProps>;
+    element?: React.ReactElement; //Download Element
+    children?: Array<React.ReactElement> | React.ReactElement; 
 }
 
-interface ExcelSheetProps {
+interface ExcelSheetProps<D, DS> {
     name: string;
-    data?: Array<object>;
-    dataSet?: Array<ExcelSheetData>;
-    value?: Array<string> | Function;
-    children?: Array<ExcelColumnProps>
+    data?: D[]; // generic DataProps
+    dataSet?: DS[]; //generic DataSheetProps
+    value: ExcelValue[] | (() => void);
+    children: React.ReactElement | Array<React.ReactElement>;
 }
 
 interface ExcelSheetData {
     xSteps?: number;
     ySteps?: number;
-    columns: Array<string>;
-    data: Array<ExcelCellData>;
+    columns: ExcelSheetCol[];
+    data: ExcelCellData[][];
 }
+
+interface ExcelSheetCol {
+    title: string;
+    width?: ExcelWidth;
+    style?: ExcelStyle;
+}
+
+interface ExcelWidth {
+    /** width in screen pixels */
+    wpx?: number;
+
+    /** width in "characters" */
+    wch?: number;
+    /** hidden column if true, default, false */
+    hidden?: boolean;
+}
+
 
 type ExcelCellData = ExcelValue | ExcelCell;
 type ExcelValue = string | number | Date | boolean;

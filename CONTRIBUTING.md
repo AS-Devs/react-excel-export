@@ -4,4 +4,4 @@ We are happy you wish to contribute this project, as this is the newly created f
 
 However, you can raise issues here.
 
-[Raise an Issue](https://github.com/AS-Devs/react-excel-export/issues)
+[Raise an Issue](https://github.com/AS-Devs/react-xlsx-wrapper/issues)
