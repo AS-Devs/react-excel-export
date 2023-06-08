@@ -7,7 +7,29 @@ const react_1 = __importDefault(require("react"));
 const xlsx_js_style_1 = require("xlsx-js-style");
 const DataUtil_1 = require("../utils/DataUtil");
 const ExcelFile = ({ hideElement = false, filename = "Download", fileExtension = "xlsx", element = react_1.default.createElement("button", null, "Download"), children, }) => {
-    const fileExtensions = ["xlsx", "xls", "csv", "txt", "html"];
+    const fileExtensions = [
+        "xlsx",
+        "xlsm",
+        "xlsb",
+        "xls",
+        "xla",
+        "biff2",
+        "biff5",
+        "biff8",
+        "xlml",
+        "ods",
+        "fods",
+        "csv",
+        "txt",
+        "sylk",
+        "slk",
+        "html",
+        "dif",
+        "rtf",
+        "prn",
+        "eth",
+        "dbf",
+    ];
     const defaultFileExtension = "xlsx";
     const createSheetData = (sheet) => {
         const columns = sheet.props.children;
@@ -60,15 +82,21 @@ const ExcelFile = ({ hideElement = false, filename = "Download", fileExtension =
     };
     const getFileExtension = () => {
         let extension = fileExtension;
+        if (fileExtensions.indexOf(extension) !== -1) {
+            return extension;
+        }
+        // file Extension not provided, we need to get it from the filename
+        let extFromFileName = "xlsx";
         if (extension.length === 0) {
             const slugs = filename.split(".");
             if (slugs.length === 0) {
                 throw new Error("Invalid file name provided");
             }
-            extension = slugs[slugs.length - 1];
+            extFromFileName = slugs[slugs.length - 1];
         }
-        if (fileExtensions.indexOf(extension) !== -1) {
-            return extension;
+        const isExtensionValid = fileExtensions.includes(extFromFileName.toLowerCase());
+        if (isExtensionValid) {
+            return extFromFileName;
         }
         return defaultFileExtension;
     };

@@ -21,7 +21,7 @@ var ExcelFile = function ExcelFile(_ref) {
     _ref$element = _ref.element,
     element = _ref$element === void 0 ? react_1.default.createElement("button", null, "Download") : _ref$element,
     children = _ref.children;
-  var fileExtensions = ["xlsx", "xls", "csv", "txt", "html"];
+  var fileExtensions = ["xlsx", "xlsm", "xlsb", "xls", "xla", "biff2", "biff5", "biff8", "xlml", "ods", "fods", "csv", "txt", "sylk", "slk", "html", "dif", "rtf", "prn", "eth", "dbf"];
   var defaultFileExtension = "xlsx";
   var createSheetData = function createSheetData(sheet) {
     var columns = sheet.props.children;
@@ -73,15 +73,21 @@ var ExcelFile = function ExcelFile(_ref) {
   };
   var getFileExtension = function getFileExtension() {
     var extension = fileExtension;
+    if (fileExtensions.indexOf(extension) !== -1) {
+      return extension;
+    }
+    // file Extension not provided, we need to get it from the filename
+    var extFromFileName = "xlsx";
     if (extension.length === 0) {
       var slugs = filename.split(".");
       if (slugs.length === 0) {
         throw new Error("Invalid file name provided");
       }
-      extension = slugs[slugs.length - 1];
+      extFromFileName = slugs[slugs.length - 1];
     }
-    if (fileExtensions.indexOf(extension) !== -1) {
-      return extension;
+    var isExtensionValid = fileExtensions.includes(extFromFileName.toLowerCase());
+    if (isExtensionValid) {
+      return extFromFileName;
     }
     return defaultFileExtension;
   };
