@@ -59,7 +59,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:watch": "esw -w lib/**",
-    "prepare": "npm run build",
     "publish": "npm publish"
   }
 }
