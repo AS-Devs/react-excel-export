@@ -1,9 +1,5 @@
 declare module 'react-xlsx-wrapper' {
   import * as React from 'react';
-  
-  export type DataProps = {
-    [key: string]: ExcelValue;
-  };
 
   export interface ExcelFileProps {
     filename?: string;
@@ -12,10 +8,10 @@ declare module 'react-xlsx-wrapper' {
     children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
   }
 
-  export interface ExcelSheetProps<D, DS> {
+  export interface ExcelSheetProps {
     name: string;
-    data?: D[];
-    dataSet?: DS[];
+    data?: any[];
+    dataSet?: ExcelSheetData[];
     value: ExcelValue[] | (() => void);
     children: React.ReactElement | Array<React.ReactElement>;
   }
@@ -140,7 +136,7 @@ declare module 'react-xlsx-wrapper' {
     export class ExcelColumn extends React.Component<ExcelColumnProps, any> {
     }
   
-    export class ExcelSheet extends React.Component<ExcelSheetProps<DataProps|undefined, ExcelSheetData|undefined>, any> {
+    export class ExcelSheet extends React.Component<ExcelSheetProps, any> {
     }
   
     export class ExcelFile extends React.Component<ExcelFileProps, any> {

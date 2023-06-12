@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import ExcelColumn from "./ExcelColumn";
-import type { DataProps, ExcelValue, ExcelSheetData } from "react-xlsx-wrapper";
+import type { ExcelValue, ExcelSheetData } from "react-xlsx-wrapper";
 
-export interface ExcelSheetProps<D, DS> {
+export interface ExcelSheetProps {
   name: string;
-  data?: D[];
-  dataSet?: DS[];
+  data?: any[];
+  dataSet?: ExcelSheetData[];
   value: ExcelValue[] | (() => void);
   children: React.ReactElement<typeof ExcelColumn>[];
 }
-export default class ExcelSheet extends Component<
-  ExcelSheetProps<DataProps, ExcelSheetData>
-> {
-  constructor(props: ExcelSheetProps<DataProps, ExcelSheetData>) {
+export default class ExcelSheet extends Component<ExcelSheetProps> {
+  constructor(props: ExcelSheetProps) {
     super(props);
 
     if (!props.children.every((child) => child.type === ExcelColumn)) {

@@ -3,9 +3,7 @@ import { utils, writeFile } from "xlsx-js-style";
 import type { BookType, WorkSheet } from "xlsx-js-style";
 import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
 import type {
-  DataProps,
   ExcelColumnProps,
-  ExcelSheetData,
   ExcelSheetProps,
   ExcelValue,
 } from "react-xlsx-wrapper";
@@ -15,7 +13,7 @@ interface ExcelFileProps {
   filename?: string;
   fileExtension?: BookType;
   element?: React.ReactNode;
-  children: React.ReactElement<ExcelSheetProps<DataProps, ExcelSheetData>>[];
+  children: React.ReactElement<ExcelSheetProps>[];
 }
 
 class ExcelFile extends React.Component<ExcelFileProps> {
@@ -39,9 +37,7 @@ class ExcelFile extends React.Component<ExcelFileProps> {
     }
   }
 
-  createSheetData = (
-    sheet: React.ReactElement<ExcelSheetProps<DataProps, ExcelSheetData>>
-  ) => {
+  createSheetData = (sheet: React.ReactElement<ExcelSheetProps>) => {
     const columns = sheet.props.children;
     const sheetData = [
       React.Children.map(
@@ -52,14 +48,13 @@ class ExcelFile extends React.Component<ExcelFileProps> {
 
     const data = sheet.props.data;
     if (!data) throw new Error("No data provided");
-    data.forEach((row: DataProps) => {
+    data.forEach((row: any) => {
       let sheetRow: ExcelValue[] = [];
 
       React.Children.forEach(
         columns,
         (column: React.ReactElement<ExcelColumnProps>) => {
-          const getValue = (row: DataProps) =>
-            row[column.props.value as string];
+          const getValue = (row: any) => row[column.props.value as string];
           const itemValue = getValue(row);
           sheetRow.push(isNaN(Number(itemValue)) ? itemValue || "" : itemValue);
         }

@@ -23,7 +23,6 @@ yarn add react-xlsx-wrapper@latest
 
 - [Simple Excel Export](examples/simple_excel_export_01.md)
 - [Excel Export with Dataset](examples/simple_excel_export_02.md)
-- [Excel Export with Custom Download Button](examples/with_custom_download_element.md)
 - [Excel Export with custom cells style](examples/styled_excel_sheet.md)
 
 ## Excel Props
