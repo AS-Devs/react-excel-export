@@ -6,32 +6,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const xlsx_js_style_1 = require("xlsx-js-style");
 const DataUtil_1 = require("../utils/DataUtil");
-const ExcelFile = ({ hideElement = false, filename = "Download", fileExtension = "xlsx", element = react_1.default.createElement("button", null, "Download"), children, }) => {
-    const fileExtensions = [
-        "xlsx",
-        "xlsm",
-        "xlsb",
-        "xls",
-        "xla",
-        "biff2",
-        "biff5",
-        "biff8",
-        "xlml",
-        "ods",
-        "fods",
-        "csv",
-        "txt",
-        "sylk",
-        "slk",
-        "html",
-        "dif",
-        "rtf",
-        "prn",
-        "eth",
-        "dbf",
-    ];
-    const defaultFileExtension = "xlsx";
-    const createSheetData = (sheet) => {
+class ExcelFile extends react_1.default.Component {
+    state = {
+        fileName: "Download",
+        fileExtension: "xlsx",
+    };
+    componentDidMount() {
+        if (this.props.filename) {
+            this.setState({
+                fileName: this.props.filename,
+            });
+        }
+        if (this.props.fileExtension) {
+            this.setState({
+                fileExtension: this.props.fileExtension,
+            });
+        }
+    }
+    createSheetData = (sheet) => {
         const columns = sheet.props.children;
         const sheetData = [
             react_1.default.Children.map(columns, (column) => column.props.label),
@@ -50,16 +42,16 @@ const ExcelFile = ({ hideElement = false, filename = "Download", fileExtension =
         });
         return sheetData;
     };
-    const download = () => {
+    download = () => {
         const wb = xlsx_js_style_1.utils.book_new();
-        const fileName = getFileName();
-        const fileExtension = getFileExtension();
-        react_1.default.Children.forEach(children, (sheet) => {
+        const fileName = this.getFileName();
+        const fileExtension = this.getFileExtension();
+        react_1.default.Children.forEach(this.props.children, (sheet) => {
             let ws = {};
             const wsName = sheet.props.name || fileName.split(".")[0] || "Sheet1";
             if (typeof sheet.props.dataSet === "undefined" ||
                 sheet.props.dataSet.length === 0) {
-                ws = (0, DataUtil_1.excelSheetFromAoA)(createSheetData(sheet));
+                ws = (0, DataUtil_1.excelSheetFromAoA)(this.createSheetData(sheet));
             }
             else {
                 ws = (0, DataUtil_1.excelSheetFromDataSet)(sheet.props.dataSet);
@@ -74,43 +66,47 @@ const ExcelFile = ({ hideElement = false, filename = "Download", fileExtension =
             cellStyles: true,
         });
     };
-    const getFileName = () => {
-        if (filename === null || typeof filename !== "string") {
+    getFileNameWithExtension = (filename, extension) => {
+        return `${filename}.${extension}`;
+    };
+    getFileName = () => {
+        if (this.state.fileName === null ||
+            typeof this.state.fileName !== "string") {
             throw new Error("Invalid file name provided");
         }
-        return getFileNameWithExtension(filename?.split(".")[0], getFileExtension());
+        return this.getFileNameWithExtension(this.state.fileName?.split(".")[0], this.getFileExtension());
     };
-    const getFileExtension = () => {
-        let extension = fileExtension;
-        if (fileExtensions.indexOf(extension) !== -1) {
+    getFileExtension = () => {
+        let extension = this.state.fileExtension;
+        if (this.props.fileExtension?.indexOf(extension) !== -1) {
             return extension;
         }
         // file Extension not provided, we need to get it from the filename
         let extFromFileName = "xlsx";
         if (extension.length === 0) {
-            const slugs = filename.split(".");
+            const slugs = this.state.fileName.split(".");
             if (slugs.length === 0) {
                 throw new Error("Invalid file name provided");
             }
             extFromFileName = slugs[slugs.length - 1];
         }
-        const isExtensionValid = fileExtensions.includes(extFromFileName.toLowerCase());
+        const isExtensionValid = this.props.fileExtension?.includes(extFromFileName.toLowerCase());
         if (isExtensionValid) {
             return extFromFileName;
         }
-        return defaultFileExtension;
+        return this.state.fileExtension;
     };
-    const getFileNameWithExtension = (filename, extension) => {
-        return `${filename}.${extension}`;
+    handleDownload = () => {
+        this.download();
     };
-    const handleDownload = () => {
-        download();
-    };
-    if (hideElement) {
-        return null;
+    render() {
+        const { hideElement, element } = this.props;
+        if (hideElement) {
+            return null;
+        }
+        else {
+            return react_1.default.createElement("span", { onClick: this.handleDownload }, element);
+        }
     }
-    else {
-        return react_1.default.createElement("span", { onClick: handleDownload }, element);
-    }
-};
+}
 exports.default = ExcelFile;
