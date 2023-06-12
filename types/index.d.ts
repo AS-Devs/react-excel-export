@@ -12,8 +12,8 @@ declare module 'react-xlsx-wrapper' {
     name: string;
     data?: any[];
     dataSet?: ExcelSheetData[];
-    value: ExcelValue[] | (() => void);
-    children: React.ReactElement | Array<React.ReactElement>;
+    value?: ExcelValue[] | (() => void);
+    children?: React.ReactElement | Array<React.ReactElement>;
   }
 
   export interface ExcelSheetData {

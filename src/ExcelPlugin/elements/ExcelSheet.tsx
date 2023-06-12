@@ -6,14 +6,14 @@ export interface ExcelSheetProps {
   name: string;
   data?: any[];
   dataSet?: ExcelSheetData[];
-  value: ExcelValue[] | (() => void);
-  children: React.ReactElement<typeof ExcelColumn>[];
+  value?: ExcelValue[] | (() => void);
+  children?: React.ReactElement<typeof ExcelColumn>[];
 }
 export default class ExcelSheet extends Component<ExcelSheetProps> {
   constructor(props: ExcelSheetProps) {
     super(props);
 
-    if (!props.children.every((child) => child.type === ExcelColumn)) {
+    if (!props.children?.every((child) => child.type === ExcelColumn)) {
       throw new Error("<ExcelSheet> can only have <ExcelColumn> as children");
     }
   }
