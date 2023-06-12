@@ -9,7 +9,7 @@ export interface ExcelSheetProps<D, DS> {
   value: ExcelValue[] | (() => void);
   children: React.ReactElement<typeof ExcelColumn>[];
 }
-export class ExcelSheet extends Component<
+export default class ExcelSheet extends Component<
   ExcelSheetProps<DataProps, ExcelSheetData>
 > {
   constructor(props: ExcelSheetProps<DataProps, ExcelSheetData>) {
@@ -24,5 +24,3 @@ export class ExcelSheet extends Component<
     return null;
   }
 }
-
-export default ExcelSheet;

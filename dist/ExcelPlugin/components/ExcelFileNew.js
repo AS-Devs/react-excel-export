@@ -144,4 +144,6 @@ var ExcelFile = /*#__PURE__*/function (_react_1$default$Comp) {
   }]);
   return ExcelFile;
 }(react_1.default.Component);
+(0, _defineProperty2.default)(ExcelFile, "ExcelColumn", void 0);
+(0, _defineProperty2.default)(ExcelFile, "ExcelSheet", void 0);
 exports.default = ExcelFile;

@@ -1,9 +1,14 @@
 declare module 'react-xlsx-wrapper' {
   import * as React from 'react';
-
+  
   export type DataProps = {
     [key: string]: ExcelValue;
   };
+
+  // export interface ExcelFile {
+  //   ExcelSheet: ExcelSheet
+  //   ExcelColumn: ExcelColumn;
+  // }
 
   export interface ExcelFile {
     ExcelSheet: ExcelSheetProps<DataProps|undefined, ExcelSheetData|undefined>;

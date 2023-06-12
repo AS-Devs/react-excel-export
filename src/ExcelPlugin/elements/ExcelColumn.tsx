@@ -1,9 +1,8 @@
 import React from "react";
-import type { ExcelColumnProps } from "react-xlsx-wrapper";
-class ExcelColumn extends React.Component<ExcelColumnProps> {
+import { ExcelColumnProps } from "react-xlsx-wrapper";
+
+export default class ExcelColumn extends React.Component<ExcelColumnProps> {
   render() {
     return null;
   }
 }
-
-export default ExcelColumn;

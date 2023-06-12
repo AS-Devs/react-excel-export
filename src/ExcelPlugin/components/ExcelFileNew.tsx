@@ -23,6 +23,8 @@ class ExcelFile extends React.Component<ExcelFileProps> {
     fileName: "Download",
     fileExtension: "xlsx" as BookType,
   };
+  static ExcelColumn: typeof import("/Users/susanta96/Develop/OwnProject/AS-Devs/react-xlsx-wrapper/src/ExcelPlugin/elements/ExcelColumn").default;
+  static ExcelSheet: typeof import("/Users/susanta96/Develop/OwnProject/AS-Devs/react-xlsx-wrapper/src/ExcelPlugin/elements/ExcelSheet").default;
 
   componentDidMount() {
     if (this.props.filename) {

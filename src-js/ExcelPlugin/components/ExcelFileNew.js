@@ -11,6 +11,8 @@ class ExcelFile extends react_1.default.Component {
         fileName: "Download",
         fileExtension: "xlsx",
     };
+    static ExcelColumn;
+    static ExcelSheet;
     componentDidMount() {
         if (this.props.filename) {
             this.setState({

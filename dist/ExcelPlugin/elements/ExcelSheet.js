@@ -16,7 +16,6 @@ var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ExcelSheet = void 0;
 var react_1 = require("react");
 var ExcelColumn_1 = __importDefault(require("./ExcelColumn"));
 var ExcelSheet = /*#__PURE__*/function (_react_1$Component) {
@@ -41,5 +40,4 @@ var ExcelSheet = /*#__PURE__*/function (_react_1$Component) {
   }]);
   return ExcelSheet;
 }(react_1.Component);
-exports.ExcelSheet = ExcelSheet;
 exports.default = ExcelSheet;
