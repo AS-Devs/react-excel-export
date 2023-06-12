@@ -18,39 +18,26 @@ interface ExcelFileProps {
   children: React.ReactElement<ExcelSheetProps<DataProps, ExcelSheetData>>[];
 }
 
-const ExcelFile: React.FC<ExcelFileProps> = ({
-  hideElement = false,
-  filename = "Download",
-  fileExtension = "xlsx",
-  element = <button>Download</button>,
-  children,
-}) => {
-  const fileExtensions = [
-    "xlsx",
-    "xlsm",
-    "xlsb",
-    "xls",
-    "xla",
-    "biff2",
-    "biff5",
-    "biff8",
-    "xlml",
-    "ods",
-    "fods",
-    "csv",
-    "txt",
-    "sylk",
-    "slk",
-    "html",
-    "dif",
-    "rtf",
-    "prn",
-    "eth",
-    "dbf",
-  ] as const;
-  const defaultFileExtension = "xlsx";
+class ExcelFile extends React.Component<ExcelFileProps> {
+  state = {
+    fileName: "Download",
+    fileExtension: "xlsx" as BookType,
+  };
 
-  const createSheetData = (
+  componentDidMount() {
+    if (this.props.filename) {
+      this.setState({
+        fileName: this.props.filename,
+      });
+    }
+    if (this.props.fileExtension) {
+      this.setState({
+        fileExtension: this.props.fileExtension,
+      });
+    }
+  }
+
+  createSheetData = (
     sheet: React.ReactElement<ExcelSheetProps<DataProps, ExcelSheetData>>
   ) => {
     const columns = sheet.props.children;
@@ -82,19 +69,19 @@ const ExcelFile: React.FC<ExcelFileProps> = ({
     return sheetData;
   };
 
-  const download = () => {
+  download = () => {
     const wb = utils.book_new();
-    const fileName = getFileName();
-    const fileExtension: BookType = getFileExtension();
+    const fileName = this.getFileName();
+    const fileExtension: BookType = this.getFileExtension();
 
-    React.Children.forEach(children, (sheet) => {
+    React.Children.forEach(this.props.children, (sheet) => {
       let ws: WorkSheet = {};
       const wsName = sheet.props.name || fileName.split(".")[0] || "Sheet1";
       if (
         typeof sheet.props.dataSet === "undefined" ||
         sheet.props.dataSet.length === 0
       ) {
-        ws = excelSheetFromAoA(createSheetData(sheet));
+        ws = excelSheetFromAoA(this.createSheetData(sheet));
       } else {
         ws = excelSheetFromDataSet(sheet.props.dataSet);
       }
@@ -110,31 +97,38 @@ const ExcelFile: React.FC<ExcelFileProps> = ({
     });
   };
 
-  const getFileName = () => {
-    if (filename === null || typeof filename !== "string") {
+  getFileNameWithExtension = (filename: string, extension: string) => {
+    return `${filename}.${extension}`;
+  };
+
+  getFileName = () => {
+    if (
+      this.state.fileName === null ||
+      typeof this.state.fileName !== "string"
+    ) {
       throw new Error("Invalid file name provided");
     }
-    return getFileNameWithExtension(
-      filename?.split(".")[0],
-      getFileExtension()
+    return this.getFileNameWithExtension(
+      this.state.fileName?.split(".")[0],
+      this.getFileExtension()
     );
   };
 
-  const getFileExtension = (): BookType => {
-    let extension = fileExtension;
-    if (fileExtensions.indexOf(extension) !== -1) {
+  getFileExtension = (): BookType => {
+    let extension = this.state.fileExtension;
+    if (this.props.fileExtension?.indexOf(extension) !== -1) {
       return extension;
     }
     // file Extension not provided, we need to get it from the filename
     let extFromFileName = "xlsx" satisfies BookType;
     if (extension.length === 0) {
-      const slugs = filename.split(".");
+      const slugs = this.state.fileName.split(".");
       if (slugs.length === 0) {
         throw new Error("Invalid file name provided");
       }
       extFromFileName = slugs[slugs.length - 1];
     }
-    const isExtensionValid = fileExtensions.includes(
+    const isExtensionValid = this.props.fileExtension?.includes(
       extFromFileName.toLowerCase() as any
     );
 
@@ -142,22 +136,22 @@ const ExcelFile: React.FC<ExcelFileProps> = ({
       return extFromFileName as BookType;
     }
 
-    return defaultFileExtension;
+    return this.state.fileExtension;
   };
 
-  const getFileNameWithExtension = (filename: string, extension: string) => {
-    return `${filename}.${extension}`;
+  handleDownload = () => {
+    this.download();
   };
 
-  const handleDownload = () => {
-    download();
-  };
+  render() {
+    const { hideElement, element } = this.props;
 
-  if (hideElement) {
-    return null;
-  } else {
-    return <span onClick={handleDownload}>{element}</span>;
+    if (hideElement) {
+      return null;
+    } else {
+      return <span onClick={this.handleDownload}>{element}</span>;
+    }
   }
-};
+}
 
 export default ExcelFile;

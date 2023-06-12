@@ -6,6 +6,16 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v2.0.1
+
+* Fixes few bugs. remove publish scripts from package.json.
+
+## v2.0.0
+
+* Full Project Migrated to Typescript.
+* Support Full Type Safety now.
+* Add Hide Column attribute in dataSet property.
+
 ## v1.1.6
 
 * Full Project Migrated to Typescript.
