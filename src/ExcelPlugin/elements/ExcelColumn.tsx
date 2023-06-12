@@ -6,3 +6,4 @@ export default class ExcelColumn extends React.Component<ExcelColumnProps> {
     return null;
   }
 }
+ 

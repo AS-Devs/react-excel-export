@@ -5,16 +5,6 @@ declare module 'react-xlsx-wrapper' {
     [key: string]: ExcelValue;
   };
 
-  // export interface ExcelFile {
-  //   ExcelSheet: ExcelSheet
-  //   ExcelColumn: ExcelColumn;
-  // }
-
-  export interface ExcelFile {
-    ExcelSheet: ExcelSheetProps<DataProps|undefined, ExcelSheetData|undefined>;
-    ExcelColumn: ExcelColumnProps;
-  }
-
   export interface ExcelFileProps {
     filename?: string;
     fileExtension?: string;
@@ -146,5 +136,15 @@ declare module 'react-xlsx-wrapper' {
     | "dashDotDot"
     | "mediumDashDotDot"
     | "slantDashDot";
+
+    export class ExcelColumn extends React.Component<ExcelColumnProps, any> {
+    }
+  
+    export class ExcelSheet extends React.Component<ExcelSheetProps<DataProps|undefined, ExcelSheetData|undefined>, any> {
+    }
+  
+    export class ExcelFile extends React.Component<ExcelFileProps, any> {
+    }
+  
 
 }
