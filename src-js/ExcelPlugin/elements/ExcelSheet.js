@@ -8,7 +8,7 @@ const ExcelColumn_1 = __importDefault(require("./ExcelColumn"));
 class ExcelSheet extends react_1.Component {
     constructor(props) {
         super(props);
-        if (!props.children.every((child) => child.type === ExcelColumn_1.default)) {
+        if (!props.children?.every((child) => child.type === ExcelColumn_1.default)) {
             throw new Error("<ExcelSheet> can only have <ExcelColumn> as children");
         }
     }

@@ -33,7 +33,8 @@ var ExcelFile = /*#__PURE__*/function (_react_1$default$Comp) {
     _this = _super.call.apply(_super, [this].concat(args));
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "state", {
       fileName: "Download",
-      fileExtension: "xlsx"
+      fileExtension: "xlsx",
+      hideElement: false
     });
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "createSheetData", function (sheet) {
       var columns = sheet.props.children;
@@ -126,14 +127,17 @@ var ExcelFile = /*#__PURE__*/function (_react_1$default$Comp) {
           fileExtension: this.props.fileExtension
         });
       }
+      if (this.props.hideElement) {
+        this.setState({
+          hideElement: this.props.hideElement
+        });
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-        hideElement = _this$props.hideElement,
-        element = _this$props.element;
-      if (hideElement) {
+      var element = this.props.element;
+      if (this.state.hideElement === true) {
         return null;
       } else {
         return react_1.default.createElement("span", {
@@ -144,6 +148,4 @@ var ExcelFile = /*#__PURE__*/function (_react_1$default$Comp) {
   }]);
   return ExcelFile;
 }(react_1.default.Component);
-(0, _defineProperty2.default)(ExcelFile, "ExcelColumn", void 0);
-(0, _defineProperty2.default)(ExcelFile, "ExcelSheet", void 0);
 exports.default = ExcelFile;

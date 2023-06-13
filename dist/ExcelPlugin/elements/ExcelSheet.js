@@ -22,12 +22,13 @@ var ExcelSheet = /*#__PURE__*/function (_react_1$Component) {
   (0, _inherits2.default)(ExcelSheet, _react_1$Component);
   var _super = _createSuper(ExcelSheet);
   function ExcelSheet(props) {
+    var _props$children;
     var _this;
     (0, _classCallCheck2.default)(this, ExcelSheet);
     _this = _super.call(this, props);
-    if (!props.children.every(function (child) {
+    if (!((_props$children = props.children) !== null && _props$children !== void 0 && _props$children.every(function (child) {
       return child.type === ExcelColumn_1.default;
-    })) {
+    }))) {
       throw new Error("<ExcelSheet> can only have <ExcelColumn> as children");
     }
     return _this;

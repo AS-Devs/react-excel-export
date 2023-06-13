@@ -4,25 +4,17 @@ import type { BookType, WorkSheet } from "xlsx-js-style";
 import { excelSheetFromAoA, excelSheetFromDataSet } from "../utils/DataUtil";
 import type {
   ExcelColumnProps,
+  ExcelFileProps,
   ExcelSheetProps,
   ExcelValue,
 } from "react-xlsx-wrapper";
-
-interface ExcelFileProps {
-  hideElement?: boolean;
-  filename?: string;
-  fileExtension?: BookType;
-  element?: React.ReactNode;
-  children: React.ReactElement<ExcelSheetProps>[];
-}
 
 class ExcelFile extends React.Component<ExcelFileProps> {
   state = {
     fileName: "Download",
     fileExtension: "xlsx" as BookType,
+    hideElement: false,
   };
-  static ExcelColumn: typeof import("/Users/susanta96/Develop/OwnProject/AS-Devs/react-xlsx-wrapper/src/ExcelPlugin/elements/ExcelColumn").default;
-  static ExcelSheet: typeof import("/Users/susanta96/Develop/OwnProject/AS-Devs/react-xlsx-wrapper/src/ExcelPlugin/elements/ExcelSheet").default;
 
   componentDidMount() {
     if (this.props.filename) {
@@ -35,9 +27,15 @@ class ExcelFile extends React.Component<ExcelFileProps> {
         fileExtension: this.props.fileExtension,
       });
     }
+
+    if (this.props.hideElement) {
+      this.setState({
+        hideElement: this.props.hideElement,
+      });
+    }
   }
 
-  createSheetData = (sheet: React.ReactElement<ExcelSheetProps>) => {
+  createSheetData = (sheet: React.ReactElement<any>) => {
     const columns = sheet.props.children;
     const sheetData = [
       React.Children.map(
@@ -71,20 +69,23 @@ class ExcelFile extends React.Component<ExcelFileProps> {
     const fileName = this.getFileName();
     const fileExtension: BookType = this.getFileExtension();
 
-    React.Children.forEach(this.props.children, (sheet) => {
-      let ws: WorkSheet = {};
-      const wsName = sheet.props.name || fileName.split(".")[0] || "Sheet1";
-      if (
-        typeof sheet.props.dataSet === "undefined" ||
-        sheet.props.dataSet.length === 0
-      ) {
-        ws = excelSheetFromAoA(this.createSheetData(sheet));
-      } else {
-        ws = excelSheetFromDataSet(sheet.props.dataSet);
+    React.Children.forEach<React.ReactElement<ExcelSheetProps>>(
+      this.props.children,
+      (sheet) => {
+        let ws: WorkSheet = {};
+        const wsName = sheet.props.name || fileName.split(".")[0] || "Sheet1";
+        if (
+          typeof sheet.props.dataSet === "undefined" ||
+          sheet.props.dataSet.length === 0
+        ) {
+          ws = excelSheetFromAoA(this.createSheetData(sheet));
+        } else {
+          ws = excelSheetFromDataSet(sheet.props.dataSet);
+        }
+        // add worksheet to workbook
+        utils.book_append_sheet(wb, ws, wsName);
       }
-      // add worksheet to workbook
-      utils.book_append_sheet(wb, ws, wsName);
-    });
+    );
 
     writeFile(wb, fileName, {
       bookType: fileExtension,
@@ -141,9 +142,9 @@ class ExcelFile extends React.Component<ExcelFileProps> {
   };
 
   render() {
-    const { hideElement, element } = this.props;
+    const { element } = this.props;
 
-    if (hideElement) {
+    if (this.state.hideElement === true) {
       return null;
     } else {
       return <span onClick={this.handleDownload}>{element}</span>;

@@ -2,10 +2,11 @@ declare module 'react-xlsx-wrapper' {
   import * as React from 'react';
 
   export interface ExcelFileProps {
+    hideElement?: boolean; //Hide download element
     filename?: string;
     fileExtension?: string;
     element?: React.ReactElement; //Download Element
-    children?: Array<React.ReactElement> | React.ReactElement; // Array<ExcelSheetProps>;
+    children: Array<React.ReactElement<ExcelSheetProps>> | React.ReactElement<ExcelSheetProps>;
   }
 
   export interface ExcelSheetProps {
@@ -141,6 +142,11 @@ declare module 'react-xlsx-wrapper' {
   
     export class ExcelFile extends React.Component<ExcelFileProps, any> {
     }
-  
+
+    export namespace ReactExport {
+      export class ExcelFile extends React.Component<ExcelFileProps, any> {
+      }
+    }
+    export default ReactExport
 
 }

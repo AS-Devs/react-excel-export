@@ -10,9 +10,8 @@ class ExcelFile extends react_1.default.Component {
     state = {
         fileName: "Download",
         fileExtension: "xlsx",
+        hideElement: false,
     };
-    static ExcelColumn;
-    static ExcelSheet;
     componentDidMount() {
         if (this.props.filename) {
             this.setState({
@@ -22,6 +21,11 @@ class ExcelFile extends react_1.default.Component {
         if (this.props.fileExtension) {
             this.setState({
                 fileExtension: this.props.fileExtension,
+            });
+        }
+        if (this.props.hideElement) {
+            this.setState({
+                hideElement: this.props.hideElement,
             });
         }
     }
@@ -102,8 +106,8 @@ class ExcelFile extends react_1.default.Component {
         this.download();
     };
     render() {
-        const { hideElement, element } = this.props;
-        if (hideElement) {
+        const { element } = this.props;
+        if (this.state.hideElement === true) {
             return null;
         }
         else {
