@@ -48,7 +48,7 @@ const dateToNumber = (v: string, date1904?: boolean): number => {
     return (epoch - Number(new Date(Date.UTC(1899, 11, 30)))) / (24 * 60 * 60 * 1000);
 };
 
-const excelSheetFromDataSet = (dataSet: ExcelSheetData[]): WorkSheet => {
+const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelSheetCol): WorkSheet => {
     /*
     Assuming the structure of dataset
     {
@@ -62,7 +62,7 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[]): WorkSheet => {
     if (dataSet === undefined || dataSet.length === 0) {
         return {};
     }
-
+    
     let ws: WorkSheet = {};
     let range: Range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
     let rowCount = 0;
@@ -77,6 +77,12 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[]): WorkSheet => {
         }
 
         rowCount += ySteps;
+
+        if(bigHeading?.title) {
+            let cellRef = utils.encode_cell({ c: xSteps, r: rowCount });
+            getHeaderCell(bigHeading, cellRef, ws);
+            rowCount += 1;
+        }
 
         var columnsInfo: ColInfo[] = [];
         if (columns.length >= 0) {

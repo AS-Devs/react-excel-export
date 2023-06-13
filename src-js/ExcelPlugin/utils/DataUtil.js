@@ -45,7 +45,7 @@ const dateToNumber = (v, date1904) => {
     return (epoch - Number(new Date(Date.UTC(1899, 11, 30)))) / (24 * 60 * 60 * 1000);
 };
 exports.dateToNumber = dateToNumber;
-const excelSheetFromDataSet = (dataSet) => {
+const excelSheetFromDataSet = (dataSet, bigHeading) => {
     /*
     Assuming the structure of dataset
     {
@@ -71,6 +71,11 @@ const excelSheetFromDataSet = (dataSet) => {
             return;
         }
         rowCount += ySteps;
+        if (bigHeading?.title) {
+            let cellRef = xlsx_js_style_1.utils.encode_cell({ c: xSteps, r: rowCount });
+            getHeaderCell(bigHeading, cellRef, ws);
+            rowCount += 1;
+        }
         var columnsInfo = [];
         if (columns.length >= 0) {
             columns.forEach((col, index) => {

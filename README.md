@@ -36,15 +36,16 @@ yarn add react-xlsx-wrapper@latest
 | filename      | `string`            | Download   | `false`  | Excel file name to be downloaded                  |
 | fileExtension | `string`            | xlsx       | `false`  | Download file extension [xlsx]                    |
 | element       | `HTMLElement`       | `<button>` | `false`  | Element to download excel file                    |
-| children      | `Array<ExcelSheet>` | `null`     | `true`   | ExcelSheet Represents data                        |
+| children      | `React.ReactElement<ExcelSheetProps>` | `null`     | `true`   | ExcelSheet Represents data                        |
 
 ### ExcelSheet Props
 
 | Prop     | Type                    | Default | Required | Description        |
 | :------- | :---------------------- | :------ | :------- | :----------------- |
 | name     | `string`                | `""`    | `true`   | Sheet name in file |
-| data     | `array<object>`         | `null`  | `false`  | Excel Sheet data   |
-| dataSet  | `array<ExcelSheetData>` | `null`  | `false`  | Excel Sheet data   |
+| bigHeading | ` ExcelSheetCol` |`undefined`|`false`| Big Merged Cell Heading
+| data     | `any[]`         | `null`  | `false`  | Excel Sheet data   |
+| dataSet  | `ExcelSheetData[]` | `null`  | `false`  | Excel Sheet data   |
 | children | `ExcelColumn`           | `null`  | `false`  | ExcelColumns       |
 
 **Note:** In ExcelSheet props `dataSet` has `precedence` over `data` and `children` props.
@@ -62,7 +63,7 @@ top-level attributes: `fill`, `font`, `numFmt`, `alignment`, and `border`.
 |                 | fgColor        | `COLOR_SPEC`                                                                                  |
 |                 | bgColor        | `COLOR_SPEC`                                                                                  |
 | font            | name           | `"Calibri"` // default                                                                        |
-|                 | sz             | `"11"` // font size in points                                                                 |
+|                 | sz             | `11` // font size in points                                                                 |
 |                 | color          | `COLOR_SPEC`                                                                                  |
 |                 | bold           | `true` or `false`                                                                             |
 |                 | underline      | `true` or `false`                                                                             |

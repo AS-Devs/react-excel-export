@@ -11,6 +11,7 @@ declare module 'react-xlsx-wrapper' {
 
   export interface ExcelSheetProps {
     name: string;
+    bigHeading?: ExcelSheetCol;
     data?: any[];
     dataSet?: ExcelSheetData[];
     value?: ExcelValue[] | (() => void);

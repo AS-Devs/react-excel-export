@@ -80,7 +80,7 @@ class ExcelFile extends React.Component<ExcelFileProps> {
         ) {
           ws = excelSheetFromAoA(this.createSheetData(sheet));
         } else {
-          ws = excelSheetFromDataSet(sheet.props.dataSet);
+          ws = excelSheetFromDataSet(sheet.props.dataSet, sheet.props.bigHeading);
         }
         // add worksheet to workbook
         utils.book_append_sheet(wb, ws, wsName);

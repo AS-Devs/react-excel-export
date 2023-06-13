@@ -50,7 +50,7 @@ var dateToNumber = function dateToNumber(v, date1904) {
   return (epoch - Number(new Date(Date.UTC(1899, 11, 30)))) / (24 * 60 * 60 * 1000);
 };
 exports.dateToNumber = dateToNumber;
-var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet) {
+var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) {
   /*
   Assuming the structure of dataset
   {
@@ -85,6 +85,14 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet) {
       return;
     }
     rowCount += ySteps;
+    if (bigHeading !== null && bigHeading !== void 0 && bigHeading.title) {
+      var cellRef = xlsx_js_style_1.utils.encode_cell({
+        c: xSteps,
+        r: rowCount
+      });
+      getHeaderCell(bigHeading, cellRef, ws);
+      rowCount += 1;
+    }
     var columnsInfo = [];
     if (columns.length >= 0) {
       columns.forEach(function (col, index) {
@@ -111,12 +119,12 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet) {
     }
     for (var R = 0; R !== data.length; ++R, rowCount++) {
       for (var C = 0; C !== data[R].length; ++C) {
-        var cellRef = xlsx_js_style_1.utils.encode_cell({
+        var _cellRef = xlsx_js_style_1.utils.encode_cell({
           c: C + xSteps,
           r: rowCount
         });
         fixRange(range, R, C, rowCount, xSteps, ySteps);
-        getCell(data[R][C], cellRef, ws);
+        getCell(data[R][C], _cellRef, ws);
       }
     }
   });

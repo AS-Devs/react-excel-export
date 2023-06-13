@@ -1,18 +1,19 @@
 ```ts
 
 interface ExcelFileProps {
+    hideElement?: boolean; //Hide download element
     filename?: string;
     fileExtension?: string;
     element?: React.ReactElement; //Download Element
-    children?: Array<React.ReactElement> | React.ReactElement; 
+    children: Array<React.ReactElement<ExcelSheetProps>> | React.ReactElement<ExcelSheetProps>;
 }
 
-interface ExcelSheetProps<D, DS> {
+interface ExcelSheetProps {
     name: string;
-    data?: D[]; // generic DataProps
-    dataSet?: DS[]; //generic DataSheetProps
-    value: ExcelValue[] | (() => void);
-    children: React.ReactElement | Array<React.ReactElement>;
+    data?: any[];
+    dataSet?: ExcelSheetData[];
+    value?: ExcelValue[] | (() => void);
+    children?: React.ReactElement | Array<React.ReactElement>;
 }
 
 interface ExcelSheetData {
