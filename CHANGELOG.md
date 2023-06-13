@@ -6,6 +6,13 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v2.0.8
+
+* Stable Version. Older all the version from 2.0.0 has bugs. Please do not use.
+* Export / Import Fixed.
+* All Type Defination has been fixed.
+* #5, #6 Issue resolved.
+
 ## v2.0.1
 
 * Fixes few bugs. remove publish scripts from package.json.

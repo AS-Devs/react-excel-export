@@ -4,6 +4,9 @@
 
 A data export library built with and for [React](https://react.dev/), [Next.js](https://nextjs.org/)
 
+### Note
+> Please don't use this package with [2.0.0 - 2.0.7] versions. It has major issues. Either Stick to 1.1.5 or move to 2.0.8 and so on.
+
 ## Installation
 With [npm](https://www.npmjs.org/package/react-xlsx-wrapper):
 
