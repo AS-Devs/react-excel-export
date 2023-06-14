@@ -1,2 +1,6 @@
 .babelrc
 /coverage/
+/src/
+.github
+/src-js
+

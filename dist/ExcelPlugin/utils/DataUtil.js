@@ -97,11 +97,14 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
         }
       };
       ws['!merges'] = [mergedRange];
-      var cellRef = xlsx_js_style_1.utils.encode_cell({
+      var mergeRef = xlsx_js_style_1.utils.encode_range({
         c: xSteps,
-        r: rowCount
+        r: 0
+      }, {
+        c: xSteps + dataSetItem.columns.length - 1,
+        r: 0
       });
-      getHeaderCell(bigHeading, cellRef, ws);
+      getHeaderCell(bigHeading, mergeRef, ws);
       rowCount += 1;
     }
     var columnsInfo = [];
@@ -130,12 +133,12 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
     }
     for (var R = 0; R !== data.length; ++R, rowCount++) {
       for (var C = 0; C !== data[R].length; ++C) {
-        var _cellRef = xlsx_js_style_1.utils.encode_cell({
+        var cellRef = xlsx_js_style_1.utils.encode_cell({
           c: C + xSteps,
           r: rowCount
         });
         fixRange(range, R, C, rowCount, xSteps, ySteps);
-        getCell(data[R][C], _cellRef, ws);
+        getCell(data[R][C], cellRef, ws);
       }
     }
   });

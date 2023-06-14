@@ -81,17 +81,17 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelShee
         if(bigHeading?.title) {
             let mergedRange: Range = { s: { c: xSteps, r: 0 }, e: { c: dataSetItem.columns.length - 1, r: 0 } };
             ws['!merges'] = [mergedRange];
-            let cellRef = utils.encode_cell({ c: xSteps, r: rowCount });
-            getHeaderCell(bigHeading, cellRef, ws);
+            let mergeRef = utils.encode_range({ c: xSteps, r: 0 }, { c: xSteps + dataSetItem.columns.length - 1, r: 0 });
+            getHeaderCell(bigHeading, mergeRef, ws);
             rowCount += 1;
         }
 
-        var columnsInfo: ColInfo[] = [];
+        let columnsInfo: ColInfo[] = [];
         if (columns.length >= 0) {
             columns.forEach((col, index) => {
-                var cellRef = utils.encode_cell({ c: xSteps + index, r: rowCount });
+                let cellRef = utils.encode_cell({ c: xSteps + index, r: rowCount });
                 fixRange(range, 0, 0, rowCount, xSteps, ySteps);
-                var colTitle = col;
+                let colTitle = col;
                 if (typeof col === 'object'){
                     //colTitle = col.title; //moved to getHeaderCell
                     columnsInfo.push(col.width || { wpx: 100, hidden: false }); /* wch (chars), wpx (pixels) - e.g. [{wch:6},{wpx:50}] */
@@ -123,10 +123,10 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelShee
 };
 
 function getHeaderCell(v: ExcelSheetCol, cellRef: string, ws: WorkSheet): void {
-    var cell: CellObject = {
+    let cell: CellObject = {
         t:  's',
     };
-    var headerCellStyle = v.style ? v.style : { font: { bold: true } }; //if style is then use it
+    let headerCellStyle = v.style ? v.style : { font: { bold: true } }; //if style is then use it
     cell.v = v.title;
     cell.t = 's';
     cell.s = headerCellStyle;
