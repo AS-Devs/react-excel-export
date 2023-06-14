@@ -71,15 +71,14 @@ const excelSheetFromDataSet = (dataSet, bigHeading) => {
             return;
         }
         rowCount += ySteps;
-        if (bigHeading?.title) {
-            let mergedRange = { s: { c: xSteps, r: 0 }, e: { c: dataSetItem.columns.length - 1, r: 0 } };
+        if (bigHeading?.title && columns.length >= 0) {
+            columns.forEach((_, index) => {
+                const cellRef = xlsx_js_style_1.utils.encode_cell({ c: xSteps + index, r: rowCount });
+                fixRange(range, 0, 0, rowCount, xSteps, ySteps);
+                getHeaderCell(bigHeading, cellRef, ws, true, index);
+            });
+            const mergedRange = { s: { c: xSteps, r: rowCount }, e: { c: xSteps + dataSetItem.columns.length - 1, r: rowCount } };
             ws['!merges'] = [mergedRange];
-            let cell = {
-                t: 's',
-                v: bigHeading.title,
-                s: bigHeading.style ? bigHeading.style : { font: { bold: true } },
-            };
-            ws['A1'] = cell;
             rowCount += 1;
         }
         let columnsInfo = [];
@@ -113,12 +112,23 @@ const excelSheetFromDataSet = (dataSet, bigHeading) => {
     return ws;
 };
 exports.excelSheetFromDataSet = excelSheetFromDataSet;
-function getHeaderCell(v, cellRef, ws) {
-    let cell = {
+function getHeaderCell(v, cellRef, ws, isHeader, index) {
+    const bigHeadingDefualtStyle = {
+        font: { bold: true, name: "Archive", sz: 24, color: { rgb: "333" } },
+        fill: { patternType: "solid", fgColor: { rgb: "FFFFFF" } },
+        alignment: { vertical: "center", horizontal: "center" },
+    };
+    const cell = {
         t: 's',
     };
     let headerCellStyle = v.style ? v.style : { font: { bold: true } }; //if style is then use it
-    cell.v = v.title;
+    if (isHeader) {
+        cell.v = index === 0 ? v.title : '';
+        headerCellStyle = v.style ? v.style : bigHeadingDefualtStyle;
+    }
+    else {
+        cell.v = v.title;
+    }
     cell.t = 's';
     cell.s = headerCellStyle;
     ws[cellRef] = cell;

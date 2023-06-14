@@ -85,28 +85,26 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
       return;
     }
     rowCount += ySteps;
-    if (bigHeading !== null && bigHeading !== void 0 && bigHeading.title) {
+    if (bigHeading !== null && bigHeading !== void 0 && bigHeading.title && columns.length >= 0) {
+      columns.forEach(function (_, index) {
+        var cellRef = xlsx_js_style_1.utils.encode_cell({
+          c: xSteps + index,
+          r: rowCount
+        });
+        fixRange(range, 0, 0, rowCount, xSteps, ySteps);
+        getHeaderCell(bigHeading, cellRef, ws, true, index);
+      });
       var mergedRange = {
         s: {
           c: xSteps,
-          r: 0
+          r: rowCount
         },
         e: {
-          c: dataSetItem.columns.length - 1,
-          r: 0
+          c: xSteps + dataSetItem.columns.length - 1,
+          r: rowCount
         }
       };
       ws['!merges'] = [mergedRange];
-      var cell = {
-        t: 's',
-        v: bigHeading.title,
-        s: bigHeading.style ? bigHeading.style : {
-          font: {
-            bold: true
-          }
-        }
-      };
-      ws['A1'] = cell;
       rowCount += 1;
     }
     var columnsInfo = [];
@@ -150,7 +148,27 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
   return ws;
 };
 exports.excelSheetFromDataSet = excelSheetFromDataSet;
-function getHeaderCell(v, cellRef, ws) {
+function getHeaderCell(v, cellRef, ws, isHeader, index) {
+  var bigHeadingDefualtStyle = {
+    font: {
+      bold: true,
+      name: "Archive",
+      sz: 24,
+      color: {
+        rgb: "333"
+      }
+    },
+    fill: {
+      patternType: "solid",
+      fgColor: {
+        rgb: "FFFFFF"
+      }
+    },
+    alignment: {
+      vertical: "center",
+      horizontal: "center"
+    }
+  };
   var cell = {
     t: 's'
   };
@@ -159,7 +177,12 @@ function getHeaderCell(v, cellRef, ws) {
       bold: true
     }
   }; //if style is then use it
-  cell.v = v.title;
+  if (isHeader) {
+    cell.v = index === 0 ? v.title : '';
+    headerCellStyle = v.style ? v.style : bigHeadingDefualtStyle;
+  } else {
+    cell.v = v.title;
+  }
   cell.t = 's';
   cell.s = headerCellStyle;
   ws[cellRef] = cell;

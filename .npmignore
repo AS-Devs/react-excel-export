@@ -5,4 +5,8 @@
 /src-js
 /examples
 node_modules
+CONTRIBUTING.md
+.gitignore
+.eslintrc
+.eslintignore
 
