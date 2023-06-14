@@ -86,6 +86,17 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
     }
     rowCount += ySteps;
     if (bigHeading !== null && bigHeading !== void 0 && bigHeading.title) {
+      var mergedRange = {
+        s: {
+          c: xSteps,
+          r: 0
+        },
+        e: {
+          c: dataSetItem.columns.length - 1,
+          r: 0
+        }
+      };
+      ws['!merges'] = [mergedRange];
       var cellRef = xlsx_js_style_1.utils.encode_cell({
         c: xSteps,
         r: rowCount
