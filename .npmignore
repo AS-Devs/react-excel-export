@@ -3,4 +3,6 @@
 /src/
 .github
 /src-js
+/examples
+node_modules
 

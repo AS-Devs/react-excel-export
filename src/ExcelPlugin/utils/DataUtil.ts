@@ -81,8 +81,12 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelShee
         if(bigHeading?.title) {
             let mergedRange: Range = { s: { c: xSteps, r: 0 }, e: { c: dataSetItem.columns.length - 1, r: 0 } };
             ws['!merges'] = [mergedRange];
-            let mergeRef = utils.encode_range({ c: xSteps, r: 0 }, { c: xSteps + dataSetItem.columns.length - 1, r: 0 });
-            getHeaderCell(bigHeading, mergeRef, ws);
+            let cell: CellObject = {
+                t:  's',
+                v: bigHeading.title,
+                s: bigHeading.style ? bigHeading.style : { font: { bold: true } },
+            };
+            ws['A1'] = cell;
             rowCount += 1;
         }
 

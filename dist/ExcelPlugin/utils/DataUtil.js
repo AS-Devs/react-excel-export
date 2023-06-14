@@ -97,14 +97,16 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
         }
       };
       ws['!merges'] = [mergedRange];
-      var mergeRef = xlsx_js_style_1.utils.encode_range({
-        c: xSteps,
-        r: 0
-      }, {
-        c: xSteps + dataSetItem.columns.length - 1,
-        r: 0
-      });
-      getHeaderCell(bigHeading, mergeRef, ws);
+      var cell = {
+        t: 's',
+        v: bigHeading.title,
+        s: bigHeading.style ? bigHeading.style : {
+          font: {
+            bold: true
+          }
+        }
+      };
+      ws['A1'] = cell;
       rowCount += 1;
     }
     var columnsInfo = [];

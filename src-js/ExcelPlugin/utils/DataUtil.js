@@ -74,8 +74,12 @@ const excelSheetFromDataSet = (dataSet, bigHeading) => {
         if (bigHeading?.title) {
             let mergedRange = { s: { c: xSteps, r: 0 }, e: { c: dataSetItem.columns.length - 1, r: 0 } };
             ws['!merges'] = [mergedRange];
-            let mergeRef = xlsx_js_style_1.utils.encode_range({ c: xSteps, r: 0 }, { c: xSteps + dataSetItem.columns.length - 1, r: 0 });
-            getHeaderCell(bigHeading, mergeRef, ws);
+            let cell = {
+                t: 's',
+                v: bigHeading.title,
+                s: bigHeading.style ? bigHeading.style : { font: { bold: true } },
+            };
+            ws['A1'] = cell;
             rowCount += 1;
         }
         let columnsInfo = [];
