@@ -6,6 +6,18 @@ changes may not be included if they are not expected to break existing code.
 
 * Export `NaN` values to `#NUM!` and infinite values to `#DIV/0!`
 
+## v2.6.0
+
+* Stable Version. Fixed Column Width bugs on xStep Parameter
+* Added New feature to handle auto filter support on the headers. Just add autoFilterForAllColumn to `true`.
+* Reduced the size of the package. Trying to improve more.
+
+## v2.5.0
+
+* It does support bigHeading properly. From v2.0.9 - v2.4.0 was not stable due to continues work on BigHeading Feature, 
+* It does have good default Styling even if you don't pass it.
+
+
 ## v2.0.8
 
 * Stable Version. Older all the version from 2.0.0 has bugs. Please do not use.

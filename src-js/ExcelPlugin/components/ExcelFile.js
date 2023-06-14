@@ -60,7 +60,7 @@ class ExcelFile extends react_1.default.Component {
                 ws = (0, DataUtil_1.excelSheetFromAoA)(this.createSheetData(sheet));
             }
             else {
-                ws = (0, DataUtil_1.excelSheetFromDataSet)(sheet.props.dataSet, sheet.props.bigHeading);
+                ws = (0, DataUtil_1.excelSheetFromDataSet)(sheet.props.dataSet, sheet.props.bigHeading, sheet.props.autoFilterForAllColumn);
             }
             // add worksheet to workbook
             xlsx_js_style_1.utils.book_append_sheet(wb, ws, wsName);

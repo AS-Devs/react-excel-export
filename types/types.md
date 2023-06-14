@@ -10,10 +10,12 @@ interface ExcelFileProps {
 
 interface ExcelSheetProps {
     name: string;
+    bigHeading?: ExcelSheetCol;
     data?: any[];
     dataSet?: ExcelSheetData[];
     value?: ExcelValue[] | (() => void);
     children?: React.ReactElement | Array<React.ReactElement>;
+    autoFilterForAllColumn?: boolean;
 }
 
 interface ExcelSheetData {

@@ -44,6 +44,7 @@ yarn add react-xlsx-wrapper@latest
 | :------- | :---------------------- | :------ | :------- | :----------------- |
 | name     | `string`                | `""`    | `true`   | Sheet name in file |
 | bigHeading | ` ExcelSheetCol` |`undefined`|`false`| Big Merged Cell Heading
+| autoFilterForAllColumn | `boolean` | `false` | `false` | Auto Filter Generated Based on Colums
 | data     | `any[]`         | `null`  | `false`  | Excel Sheet data   |
 | dataSet  | `ExcelSheetData[]` | `null`  | `false`  | Excel Sheet data   |
 | children | `ExcelColumn`           | `null`  | `false`  | ExcelColumns       |

@@ -66,7 +66,7 @@ var ExcelFile = /*#__PURE__*/function (_react_1$default$Comp) {
         if (typeof sheet.props.dataSet === "undefined" || sheet.props.dataSet.length === 0) {
           ws = (0, DataUtil_1.excelSheetFromAoA)(_this.createSheetData(sheet));
         } else {
-          ws = (0, DataUtil_1.excelSheetFromDataSet)(sheet.props.dataSet, sheet.props.bigHeading);
+          ws = (0, DataUtil_1.excelSheetFromDataSet)(sheet.props.dataSet, sheet.props.bigHeading, sheet.props.autoFilterForAllColumn);
         }
         // add worksheet to workbook
         xlsx_js_style_1.utils.book_append_sheet(wb, ws, wsName);

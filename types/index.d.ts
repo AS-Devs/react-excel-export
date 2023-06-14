@@ -16,6 +16,7 @@ declare module 'react-xlsx-wrapper' {
     dataSet?: ExcelSheetData[];
     value?: ExcelValue[] | (() => void);
     children?: React.ReactElement | Array<React.ReactElement>;
+    autoFilterForAllColumn?: boolean;
   }
 
   export interface ExcelSheetData {

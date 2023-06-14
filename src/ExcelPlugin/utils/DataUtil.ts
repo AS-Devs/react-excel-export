@@ -48,7 +48,17 @@ const dateToNumber = (v: string, date1904?: boolean): number => {
     return (epoch - Number(new Date(Date.UTC(1899, 11, 30)))) / (24 * 60 * 60 * 1000);
 };
 
-const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelSheetCol): WorkSheet => {
+/**
+ * This returns the worksheet object for the given dataSet, also accept bigHeading.
+ *
+ * @param dataSet - The ExcelSheetData array is required
+ * @param bigHeading - ExcelSheetCol (Optional)
+ * @returns WorkSheet Object
+ *
+ * @author Susanta Chakraborty
+ * @date 2023-06-14
+ */
+const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelSheetCol, autoFilterForAllColumn?: boolean): WorkSheet => {
     /*
     Assuming the structure of dataset
     {
@@ -91,6 +101,13 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelShee
         }
 
         let columnsInfo: ColInfo[] = [];
+        // if xStep has value then we need to skip some columns
+        if (xSteps > 0) {
+            for (let i = 0; i < xSteps; i++) {
+                columnsInfo.push({ wpx: 100 });
+            }
+        }
+
         if (columns.length >= 0) {
             columns.forEach((col, index) => {
                 let cellRef = utils.encode_cell({ c: xSteps + index, r: rowCount });
@@ -102,6 +119,13 @@ const excelSheetFromDataSet = (dataSet: ExcelSheetData[], bigHeading?: ExcelShee
                 }
                 getHeaderCell(colTitle, cellRef, ws);
             });
+
+            if(autoFilterForAllColumn){
+                const filterRange: Range = { s: { c: xSteps, r: rowCount }, e: { c: xSteps + dataSetItem.columns.length - 1, r: rowCount } };
+                const filterRef = utils.encode_range(filterRange);
+                console.log(filterRef);
+                ws['!autofilter'] = { ref: filterRef };
+            }
 
             rowCount += 1;
         }

@@ -50,7 +50,17 @@ var dateToNumber = function dateToNumber(v, date1904) {
   return (epoch - Number(new Date(Date.UTC(1899, 11, 30)))) / (24 * 60 * 60 * 1000);
 };
 exports.dateToNumber = dateToNumber;
-var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) {
+/**
+ * This returns the worksheet object for the given dataSet, also accept bigHeading.
+ *
+ * @param dataSet - The ExcelSheetData array is required
+ * @param bigHeading - ExcelSheetCol (Optional)
+ * @returns WorkSheet Object
+ *
+ * @author Susanta Chakraborty
+ * @date 2023-06-14
+ */
+var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading, autoFilterForAllColumn) {
   /*
   Assuming the structure of dataset
   {
@@ -108,6 +118,14 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
       rowCount += 1;
     }
     var columnsInfo = [];
+    // if xStep has value then we need to skip some columns
+    if (xSteps > 0) {
+      for (var i = 0; i < xSteps; i++) {
+        columnsInfo.push({
+          wpx: 100
+        });
+      }
+    }
     if (columns.length >= 0) {
       columns.forEach(function (col, index) {
         var cellRef = xlsx_js_style_1.utils.encode_cell({
@@ -126,6 +144,23 @@ var excelSheetFromDataSet = function excelSheetFromDataSet(dataSet, bigHeading) 
 
         getHeaderCell(colTitle, cellRef, ws);
       });
+      if (autoFilterForAllColumn) {
+        var filterRange = {
+          s: {
+            c: xSteps,
+            r: rowCount
+          },
+          e: {
+            c: xSteps + dataSetItem.columns.length - 1,
+            r: rowCount
+          }
+        };
+        var filterRef = xlsx_js_style_1.utils.encode_range(filterRange);
+        console.log(filterRef);
+        ws['!autofilter'] = {
+          ref: filterRef
+        };
+      }
       rowCount += 1;
     }
     if (columnsInfo.length > 0) {
