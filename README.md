@@ -1,10 +1,9 @@
 # React-XLSX-wrapper
 
-[![npm version](https://badge.fury.io/js/react-xlsx-wrapper.svg)](https://badge.fury.io/js/react-xlsx-wrapper)
+[![Npm-version][npm-shield]][npm-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 
 A data export library built with and for [React](https://react.dev/), [Next.js](https://nextjs.org/)
 
@@ -129,11 +128,11 @@ Borders for merged areas are specified for each cell within the merged area. So 
 - top borders for the cells on the top
 - bottom borders for the cells on the left
 
-
+[npm-shield]: https://img.shields.io/npm/v/react-xlsx-wrapper?style=for-the-badge&labelColor=44567bf&color=%23007bff
+[npm-url]: https://www.npmjs.com/package/react-xlsx-wrapper
 [forks-shield]: https://img.shields.io/github/forks/AS-Devs/react-xlsx-wrapper?color=44567bf&style=for-the-badge
 [forks-url]: https://github.com/AS-Devs/react-xlsx-wrapper/network/members
 [stars-shield]: https://img.shields.io/github/stars/AS-Devs/react-xlsx-wrapper?color=%23007bff&style=for-the-badge
 [stars-url]: https://github.com/AS-Devs/react-xlsx-wrapper/stargazers
 [issues-shield]: https://img.shields.io/github/issues/AS-Devs/react-xlsx-wrapper?style=for-the-badge
 [issues-url]: https://github.com/AS-Devs/react-xlsx-wrapper/issues
-[license-shield]: https://img.shields.io/github/license/AS-Devs/react-xlsx-wrapper?style=for-the-badge
