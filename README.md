@@ -1,6 +1,10 @@
 # React-XLSX-wrapper
 
 [![npm version](https://badge.fury.io/js/react-xlsx-wrapper.svg)](https://badge.fury.io/js/react-xlsx-wrapper)
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
 A data export library built with and for [React](https://react.dev/), [Next.js](https://nextjs.org/)
 
