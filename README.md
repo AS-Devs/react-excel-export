@@ -125,3 +125,11 @@ Borders for merged areas are specified for each cell within the merged area. So 
 - top borders for the cells on the top
 - bottom borders for the cells on the left
 
+
+[forks-shield]: https://img.shields.io/github/forks/AS-Devs/react-xlsx-wrapper?color=44567bf&style=for-the-badge
+[forks-url]: https://github.com/AS-Devs/react-xlsx-wrapper/network/members
+[stars-shield]: https://img.shields.io/github/stars/AS-Devs/react-xlsx-wrapper?color=%23007bff&style=for-the-badge
+[stars-url]: https://github.com/AS-Devs/react-xlsx-wrapper/stargazers
+[issues-shield]: https://img.shields.io/github/issues/AS-Devs/react-xlsx-wrapper?style=for-the-badge
+[issues-url]: https://github.com/AS-Devs/react-xlsx-wrapper/issues
+[license-shield]: https://img.shields.io/github/license/AS-Devs/react-xlsx-wrapper?style=for-the-badge
